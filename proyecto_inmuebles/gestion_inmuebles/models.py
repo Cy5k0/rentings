@@ -19,43 +19,6 @@ from django.contrib.auth.models import User
 #    return self.nombre
 
 
-class Inmueble(models.Model):
-    nombre = models.CharField(max_length=50)
-    descripcion = (
-        models.TextField()
-    )  # Cambiado a TextField para permitir descripciones más largas
-    m2_construidos = models.IntegerField()
-    m2_totales = models.IntegerField()
-    n_estacionamientos = models.IntegerField()
-    n_habitaciones = models.IntegerField()
-    n_baños = models.IntegerField()
-    precio = models.DecimalField(
-        max_digits=10, decimal_places=2
-    )  # Cambio a DecimalField para mayor precisión
-    moneda = models.CharField(
-        max_length=3
-    )  # ISO 4217 currency code, e.g., 'USD', 'EUR'
-    fecha_creacion = models.DateTimeField(auto_now_add=True)
-    fecha_actualizacion = models.DateTimeField(auto_now=True)
-    calle = models.CharField(max_length=100)
-    numero = models.CharField(max_length=10)
-    ciudad = models.ForeignKey(
-        to=Ciudad, on_delete=models.PROTECT
-    )  # Relación con la ciudad
-    codigo_postal = models.CharField(max_length=20, null=True, blank=True)
-    latitud = models.DecimalField(
-        max_digits=9, decimal_places=6
-    )  # los agregue con el fin de usar eventualmente googlemaps para ubicacion
-    longitud = models.DecimalField(
-        max_digits=9, decimal_places=6
-    )  # los agregue con el fin de usar eventualmente googlemaps para ubicacion
-    disponible = models.BooleanField(default=True)
-    tipo_inmueble = models.ForeignKey(TipoInmueble, on_delete=models.PROTECT)
-
-    def __str__(self):
-        return f"{self.nombre} - {self.direccion}"
-
-
 class Pais(models.Model):
     nombre = models.CharField(max_length=50)
     codigo = models.CharField(
@@ -92,6 +55,43 @@ class TipoInmueble(models.Model):
 
     def __str__(self):
         return f"{self.nombre}"
+
+
+class Inmueble(models.Model):
+    nombre = models.CharField(max_length=50)
+    descripcion = (
+        models.TextField()
+    )  # Cambiado a TextField para permitir descripciones más largas
+    m2_construidos = models.IntegerField()
+    m2_totales = models.IntegerField()
+    n_estacionamientos = models.IntegerField()
+    n_habitaciones = models.IntegerField()
+    n_baños = models.IntegerField()
+    precio = models.DecimalField(
+        max_digits=10, decimal_places=2
+    )  # Cambio a DecimalField para mayor precisión
+    moneda = models.CharField(
+        max_length=3
+    )  # ISO 4217 currency code, e.g., 'USD', 'EUR'
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_actualizacion = models.DateTimeField(auto_now=True)
+    calle = models.CharField(max_length=100)
+    numero = models.CharField(max_length=10)
+    ciudad = models.ForeignKey(
+        to=Ciudad, on_delete=models.PROTECT
+    )  # Referencia como string
+    codigo_postal = models.CharField(max_length=20, null=True, blank=True)
+    latitud = models.DecimalField(
+        max_digits=9, decimal_places=6, null=True, blank=True
+    )  # los agregue con el fin de usar eventualmente googlemaps para ubicacion
+    longitud = models.DecimalField(
+        max_digits=9, decimal_places=6, null=True, blank=True
+    )  # los agregue con el fin de usar eventualmente googlemaps para ubicacion
+    disponible = models.BooleanField(default=True)
+    tipo_inmueble = models.ForeignKey(TipoInmueble, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return f"{self.nombre} - {self.direccion}"
 
 
 class ImagenInmueble(models.Model):
