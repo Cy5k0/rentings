@@ -22,10 +22,8 @@ from django.contrib.auth.models import User
 class Pais(models.Model):
     id = models.AutoField(primary_key=True)  # Campo ID como clave primaria
     nombre = models.CharField(max_length=50)
-    codigo = models.CharField(
-        max_length=3,null=True, blank=True
+    codigo = models.CharField(max_length=3, null=True, blank=True)
 
-    )
     def __str__(self):
         return f"{self.nombre}"
 
@@ -34,6 +32,7 @@ class EstadoProvincia(models.Model):
     id = models.AutoField(primary_key=True)  # Campo ID como clave primaria
     nombre = models.CharField(max_length=50)
     pais = models.ForeignKey(Pais, on_delete=models.PROTECT)
+
     def __str__(self):
         return f"{self.nombre}, {self.pais.nombre}"
 
@@ -113,15 +112,16 @@ class TipoUsuario(models.Model):
     def str(self):
         return self.get_tipo_display()
 
+
 class Usuario(User):
     id_nacional = models.CharField(
         max_length=20, unique=True
     )  # Identificador más general
     nombre = models.CharField(max_length=50, default="")
-    estado=models.BooleanField(default=True)
+    estado = models.BooleanField(default=True)
     apellido_paterno = models.CharField(max_length=50, default="")
     apellido_materno = models.CharField(max_length=50, default="")
-    # email = models.EmailField(unique=True)  # Eliminar este campo
+    correo_electronico = models.EmailField(unique=True)  # Eliminar este campo
     direccion = models.CharField(max_length=150)
     telefono = models.CharField(
         max_length=15, unique=True
