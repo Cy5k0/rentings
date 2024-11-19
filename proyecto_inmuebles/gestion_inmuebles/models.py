@@ -20,27 +20,28 @@ from django.contrib.auth.models import User
 
 
 class Pais(models.Model):
+    id = models.AutoField(primary_key=True)  # Campo ID como clave primaria
     nombre = models.CharField(max_length=50)
     codigo = models.CharField(
-        max_length=3,unique=True 
-    )  # ISO 3166-1 alpha-3 code, e.g., 'USA', 'CAN'
+        max_length=3,null=True, blank=True
 
+    )
     def __str__(self):
         return f"{self.nombre}"
 
 
 class EstadoProvincia(models.Model):
+    id = models.AutoField(primary_key=True)  # Campo ID como clave primaria
     nombre = models.CharField(max_length=50)
-    #pais = models.ForeignKey(to=Pais, on_delete=models.PROTECT)
-    pais = models.ForeignKey(to=Pais, on_delete=models.PROTECT,to_field='codigo' )
-
+    pais = models.ForeignKey(Pais, on_delete=models.PROTECT)
     def __str__(self):
         return f"{self.nombre}, {self.pais.nombre}"
 
 
 class Ciudad(models.Model):
-    nombre = models.CharField(max_length=50)
-    estado_provincia = models.ForeignKey(to=EstadoProvincia, on_delete=models.PROTECT)
+    id = models.AutoField(primary_key=True)  # Campo ID como clave primaria
+    nombre = models.CharField(max_length=150)
+    estado_provincia = models.ForeignKey(EstadoProvincia, on_delete=models.PROTECT)
 
     def __str__(self):
         return f"{self.nombre}, {self.estado_provincia.nombre}"
@@ -101,27 +102,32 @@ class ImagenInmueble(models.Model):
 
 
 class TipoUsuario(models.Model):
-    # TIPOS_USUARIO = (
-    #     (1, 'arrendador'),
-    #     (2, 'arrendatario')
-    #     )
-    nombre = models.CharField(max_length=20)
+    TIPOS_USUARIO = (
+        (0, "Nulo"),
+        (1, "arrendador"),
+        (2, "arrendatario"),
+        (3, "administrador"),
+    )
+    tipo = models.IntegerField(choices=TIPOS_USUARIO, default=0)
 
-    def __str__(self):
-        return f"{self.nombre}"
-
+    def str(self):
+        return self.get_tipo_display()
 
 class Usuario(User):
     id_nacional = models.CharField(
         max_length=20, unique=True
     )  # Identificador más general
+    nombre = models.CharField(max_length=50, default="")
+    apellido_paterno = models.CharField(max_length=50, default="")
+    apellido_materno = models.CharField(max_length=50, default="")
+    # email = models.EmailField(unique=True)  # Eliminar este campo
     direccion = models.CharField(max_length=150)
     telefono = models.CharField(
         max_length=15, unique=True
     )  # Aumentado a 15 para números internacionales
-    tipo_usuario = models.ForeignKey(to=TipoUsuario, on_delete=models.CASCADE)
+    tipo_usuario = models.ForeignKey(TipoUsuario, on_delete=models.CASCADE)
 
-    def __str__(self):
+    def str(self):
         return f"[{self.id_nacional}]"
 
 
