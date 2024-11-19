@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Indice</title>
+  </head>
+  <body>
+    {% extends 'layout/base.html' %} {% block content %}
+
+    <!-- Carrusel -->
+    <div id="flanCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#flanCarousel"
+          data-bs-slide-to="0"
+          class="active"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#flanCarousel"
+          data-bs-slide-to="1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#flanCarousel"
+          data-bs-slide-to="2"
+        ></button>
+      </div>
+
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img
+            src="https://picsum.photos/id/237/800/400"
+            class="d-block w-100"
+            alt="Flan de vainilla"
+          />
+          <div class="carousel-caption">
+            <h5>¡Flanes Celestiales!</h5>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+              eiusmod tempor incididunt ut labore.
+            </p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img
+            src="https://picsum.photos/id/235/800/400"
+            class="d-block w-100"
+            alt="Flan de chocolate"
+          />
+          <div class="carousel-caption">
+            <h5>¡Delicias Cremosas!</h5>
+            <p>
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip.
+            </p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img
+            src="https://picsum.photos/id/230/800/400"
+            class="d-block w-100"
+            alt="Flan de caramelo"
+          />
+          <div class="carousel-caption">
+            <h5>¡Sabores Únicos!</h5>
+            <p>
+              Duis aute irure dolor in reprehenderit in voluptate velit esse
+              cillum dolore.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#flanCarousel"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#flanCarousel"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </button>
+    </div>
+
+    <!-- Sección de Bienvenida -->
+    <div class="welcome-section py-5 bg-light">
+      <div class="container text-center">
+        <h2 class="display-4 mb-4">
+          ¡Bienvenidos al Paraíso de los Flanes! 🍮✨
+        </h2>
+        <p class="lead">
+          ¡Hola, flanáticos y flanáticas! 👋 Habéis llegado al lugar donde los
+          sueños dulces se hacen realidad.
+        </p>
+        <p class="fs-5">
+          Aquí encontrarán los flanes más esponjosos, cremosos y deliciosos que
+          jamás han probado. ¡Nuestros flanes son tan ricos que hasta los
+          ángeles vienen a probarlos! 😇
+        </p>
+        <p class="fs-5 mb-0">
+          ¿Saben qué es lo mejor? Cada flan está hecho con todo el amor del
+          mundo y un toque de magia. ¡Porque no hay nada más especial que un
+          flan hecho con cariño! 💖
+        </p>
+      </div>
+    </div>
+
+    <!-- Mensaje para usuarios no premium -->
+    <div class="container mt-5 mb-4">
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <div class="alert alert-info text-center p-4" role="alert">
+            <h4 class="alert-heading">
+              ✨ ¡Descubre Nuestros Flanes Disponibles! ✨
+            </h4>
+            <p class="mb-0">
+              A continuación te mostramos algunos de nuestros deliciosos flanes
+              para usuarios no premium. ¡Pero espera a ver las maravillas que
+              tenemos reservadas para nuestros miembros premium! 🌟
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cards de Flanes -->
+    <div class="container">
+      <div class="row">
+        <!--{ % for flan in flans %}-->
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title"><!--{{ flan.name }}--></h5>
+              <p class="card-text"><!--{{ flan.description }}  --></p>
+              <img
+                src="{{ flan.image_url }}"
+                class="card-img-top"
+                alt="{{ flan.name }}"
+              />
+              <!-- <a href="{ % url 'detalle_flan' flan.flan_uuid % }" class="btn btn-primary">Ver Detalles</a> -->
+            </div>
+          </div>
+        </div>
+        <!--{ % endfor %}-->
+      </div>
+    </div>
+
+
+
+    {% endblock %}
+  </body>
+</html>

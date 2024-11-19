@@ -1,3 +1,27 @@
-.logo{
-    height : "60px"
+#logo{
+    height : 60px
 }
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .carousel-item {
+    height: 400px;
+  }
+
+  .carousel-item img {
+    object-fit: cover;
+    height: 100%;
+  }
+
+  .welcome-section {
+    background-color: #fff3e6 !important;
+  }
+
+  h2 {
+    color: #ff6b6b;
+    font-family: "Comic Sans MS", cursive;
+  }
