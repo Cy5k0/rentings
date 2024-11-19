@@ -121,7 +121,7 @@ class Usuario(User):
     estado = models.BooleanField(default=True)
     apellido_paterno = models.CharField(max_length=50, default="")
     apellido_materno = models.CharField(max_length=50, default="")
-    correo_electronico = models.EmailField(unique=True)  # Eliminar este campo
+    correo_electronico = models.EmailField(unique=True, null=True, blank=True)
     direccion = models.CharField(max_length=150)
     telefono = models.CharField(
         max_length=15, unique=True
