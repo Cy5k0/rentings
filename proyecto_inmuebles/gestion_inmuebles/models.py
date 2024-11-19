@@ -118,6 +118,7 @@ class Usuario(User):
         max_length=20, unique=True
     )  # Identificador más general
     nombre = models.CharField(max_length=50, default="")
+    estado=models.BooleanField(default=True)
     apellido_paterno = models.CharField(max_length=50, default="")
     apellido_materno = models.CharField(max_length=50, default="")
     # email = models.EmailField(unique=True)  # Eliminar este campo
