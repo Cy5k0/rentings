@@ -22,7 +22,7 @@ from django.contrib.auth.models import User
 class Pais(models.Model):
     nombre = models.CharField(max_length=50)
     codigo = models.CharField(
-        max_length=3
+        max_length=3,unique=True 
     )  # ISO 3166-1 alpha-3 code, e.g., 'USA', 'CAN'
 
     def __str__(self):
@@ -31,7 +31,8 @@ class Pais(models.Model):
 
 class EstadoProvincia(models.Model):
     nombre = models.CharField(max_length=50)
-    pais = models.ForeignKey(to=Pais, on_delete=models.PROTECT)
+    #pais = models.ForeignKey(to=Pais, on_delete=models.PROTECT)
+    pais = models.ForeignKey(to=Pais, on_delete=models.PROTECT,to_field='codigo' )
 
     def __str__(self):
         return f"{self.nombre}, {self.pais.nombre}"
