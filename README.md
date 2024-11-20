@@ -1,5 +1,9 @@
 # Proyecto: Sitio Web para Arriendo de Inmuebles
 
+#### [Ir a Hito 1](#hito-1) - [Ir a Hito 2](#hito-2)
+
+## Hito 1
+
 Este proyecto tiene como objetivo desarrollar un sitio web para una empresa dedicada al arriendo de inmuebles, permitiendo a los usuarios revisar viviendas disponibles. El sistema utiliza **Django** como framework web y **PostgreSQL** como base de datos.
 
 ---
@@ -30,10 +34,73 @@ Este proyecto tiene como objetivo desarrollar un sitio web para una empresa dedi
 
 ## Importante:
 
-En el archivo [hito1.pdf](hito1.pdf) se encuentran los pantallazos solicitados en el hito 1
+En el archivo **[hito1.pdf](hito1.pdf)** se encuentran los pantallazos solicitados en el hito 1
 
-## Integrantes:
+## Hito 2
 
-- Francisco Colomer
-- Arlenis González
-- Francisco Monroy
+# Gestión de Inmuebles - Panel Administrativo Django
+
+## 📋 Descripción del Proyecto
+
+Sistema de administración para empresa de arriendo de inmuebles, enfocado en gestionar eficientemente datos de inmuebles, regiones y comunas.
+
+## 🎯 Objetivos
+
+- Se crea panel de administración personalizado
+- Se registra modelos de Inmueble, Región y Comuna, entre otros.
+- Optimización de visualización y gestión de datos
+
+## 📝 Requerimientos
+
+### 1. Creación de Superusuario
+
+- Generación de superusuario para acceso al panel
+- Configurar:
+- Nombre de usuario
+- Correo electrónico
+- Contraseña segura
+
+### 2. Registro de Modelos en Admin
+
+- Registrar en `admin.py`:
+- Modelo Inmueble
+- Modelo Región
+- Modelo Comuna
+- Método: `admin.site.register()`
+
+### 3. Personalización del Panel
+
+- Implementación configuraciones:
+- `list_display`
+- `search_fields`
+- `list_filter`
+
+### 4. Documentación
+
+- Documentación proceso de configuración
+- Incluir capturas de pantalla
+
+**[Ver documento PDF](hito2.pdf)**
+
+## 🛠️ Configuración del Proyecto
+
+### Requisitos
+
+- Python 3.x
+- Django
+- Entorno virtual
+
+### Instalación
+
+1. Clonar repositorio
+2. Crear entorno virtual
+3. Instalar dependencias
+4. Realizar migraciones
+5. Crear superusuario
+6. Iniciar servidor de desarrollo
+
+## 👥Integrantes:
+
+- [Francisco Colomer](https://github.com/Cy5k0)
+- [Arlenis González](https://github.com/agonzalezr92)
+- [Francisco Monroy](https://github.com/fmonroy75)
