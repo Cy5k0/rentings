@@ -160,3 +160,8 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_COOKIE_SECURE = True
 # Expira la sesión al cerrar el navegador
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+
+#login
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

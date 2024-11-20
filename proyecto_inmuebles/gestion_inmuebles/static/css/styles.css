@@ -35,3 +35,7 @@
     font-weight: 400;
     font-size: 2rem;
   }
+  .nav-link-custom {
+    font-size: 1rem; /* Ajusta el tamaño que prefieras */
+    color: black; /* Mantén el color negro si es necesario */
+}
