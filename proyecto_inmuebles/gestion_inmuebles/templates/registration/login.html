@@ -1,0 +1,48 @@
+{% extends "layout/base.html" %} {% block content %}{% load crispy_forms_tags %}
+
+<section class="py-5">
+  <div class="container">
+    {% if form.errors %}
+    <div class="alert alert-danger text-center" role="alert">
+      Su nombre de usuario y contraseña no coinciden. Inténtelo de nuevo.
+    </div>
+    {% endif %} {% if next %}
+    <div class="alert alert-warning text-center" role="alert">
+      {% if user.is_authenticated %} Su cuenta no tiene acceso a esta página.
+      Inicie sesión con una cuenta con acceso. {% else %} Por favor, inicie
+      sesión para ver esta página. {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow-lg mt-5 mb-5">
+          <div class="card-body">
+            <h2 class="mb-3 text-center">Iniciar sesión</h2>
+
+            <form action="" method="post">
+              {% csrf_token %} {{ form | crispy }}
+
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-lg">
+                  Entrar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="text-center mt-3">
+          <!--<p><a href="{url 'reset' }">¿Olvidó su contraseña?</a></p>-->
+          <p>
+            ¿No tiene una cuenta?
+            <!--<a href="{ % url 'registro' % }">Regístrese aquí</a>-->
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--{# Asume que configura la vista de restablecimiento de contraseña en su
+  URLconf #}
+  <p><a href="{ url 'password_reset' }">¿Olvidó su contraseña?</a></p>-->
+</section>
+{% endblock %}

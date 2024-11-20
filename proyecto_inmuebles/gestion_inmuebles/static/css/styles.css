@@ -25,3 +25,17 @@
     color: #ff6b6b;
     font-family: "Comic Sans MS", cursive;
   }
+
+  .text-LL {
+    --bs-text-opacity: 1;
+    color: (rgb(10, 10, 119), var(--bs-text-opacity));
+  }
+  .titulo {
+    font-family: "lobster";
+    font-weight: 400;
+    font-size: 2rem;
+  }
+  .nav-link-custom {
+    font-size: 1rem; /* Ajusta el tamaño que prefieras */
+    color: black; /* Mantén el color negro si es necesario */
+}

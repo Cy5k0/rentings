@@ -8,4 +8,9 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path("", views.indice , name="indice"),
+    path("contacto/", views.contacto , name="contacto"),
+    path("exito/", views.exito , name="exito"),
+    #path("contactoM", views.contactoM , name="contactoM"),
+    
+    #path('registro/', views.register, name='registro'),
     ]

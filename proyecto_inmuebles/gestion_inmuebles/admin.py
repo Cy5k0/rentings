@@ -1,4 +1,7 @@
 from django.contrib import admin
+from .models import Inmueble, Pais,EstadoProvincia,Ciudad,TipoInmueble,Inmueble,Usuario,UsuarioInmueble,Solicitud
+from .models import ContactForm
+
 from .models import (
     Inmueble,
     Pais,
@@ -27,3 +30,4 @@ admin.site.register(TipoInmueble)
 admin.site.register(Usuario, UsuarioAdmin)
 admin.site.register(UsuarioInmueble)
 admin.site.register(Solicitud)
+admin.site.register(ContactForm)
