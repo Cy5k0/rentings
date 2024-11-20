@@ -34,8 +34,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "gestion_inmuebles",
-    'crispy_forms',
-    'crispy_bootstrap5',
+    "crispy_forms",
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
@@ -125,8 +125,6 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 
-
-
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
@@ -134,26 +132,26 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 from django.contrib.messages import constants as messages
 
 MESSAGE_TAGS = {
-    messages.DEBUG: 'debug',
-    messages.INFO: 'info',
-    messages.SUCCESS: 'success',
-    messages.WARNING: 'warning',
-    messages.ERROR: 'error',
+    messages.DEBUG: "debug",
+    messages.INFO: "info",
+    messages.SUCCESS: "success",
+    messages.WARNING: "warning",
+    messages.ERROR: "error",
 }
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-#para el envio de mail
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
-EMAIL_HOST_USER = 'e8c135b474bcfc'
-EMAIL_HOST_PASSWORD = '********294e'
-EMAIL_PORT = '2525'
+# para el envio de mail
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_HOST = "sandbox.smtp.mailtrap.io"
+EMAIL_HOST_USER = "e8c135b474bcfc"
+EMAIL_HOST_PASSWORD = "********294e"
+EMAIL_PORT = "2525"
 
-#manejo de sesiones
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+# manejo de sesiones
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
 # Tiempo de expiración de la sesión en segundos (por defecto, las sesiones expiran al cerrar el navegador)
-SESSION_COOKIE_AGE = 180  # valor en segundos
+SESSION_COOKIE_AGE = 1800  # valor en segundos
 # Definir si la sesión debe expirar al cerrar el navegador
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 # Utilizar sesiones seguras solo a través de HTTPS
@@ -162,6 +160,6 @@ SESSION_COOKIE_SECURE = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 
-#login
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+# login
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
