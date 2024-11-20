@@ -13,3 +13,15 @@ class ContactFormForm(forms.Form):
     customer_name = forms.CharField(max_length=64, label="Nombre")
     customer_email = forms.EmailField(label="Correo")
     message = forms.CharField(label="Mensaje")
+    
+
+class ContactFormModelForm(ModelForm):
+    class Meta:
+        model = ContactForm
+        fields = ['customer_email', 'customer_name', 'message']
+        labels = {
+            'customer_email': 'Correo electrónico',
+            'customer_name': 'Nombre del cliente',
+            'message': 'Mensaje',
+        }    
+    
