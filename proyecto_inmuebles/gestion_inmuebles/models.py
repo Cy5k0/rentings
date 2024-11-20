@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import uuid
 
 # Create your models here.
 # class Inmueble(models.Model):
@@ -149,3 +150,16 @@ class Solicitud(models.Model):
 
     def __str__(self):
         return f"{self.usuario.id_nacional} - {self.inmueble.nombre}"
+
+
+
+
+
+
+class ContactForm(models.Model):
+    contact_form_uuid =models.UUIDField(default=uuid.uuid4, editable=False) 
+    customer_name =models.CharField(max_length=64)
+    customer_email=models.EmailField()
+    message =models. TextField()
+
+

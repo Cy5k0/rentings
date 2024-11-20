@@ -34,41 +34,46 @@
           <li class="nav-item">
             <a class="nav-link" style="color: black" href="/acerca/">Acerca de</a>
           </li>
-          {% if user.is_authenticated %}
+
+          <!--
+          { % if user.is_authenticated % }
           <li class="nav-item">
             <a class="nav-link" style="color: black" href="/bienvenido/"
               >Bienvenido</a
             >
           </li>
-          {% endif %}
+          { % endif % }-->
           <li class="nav-item">
             <a class="nav-link" style="color: black" href="/contacto/"
               >Contacto</a
             >
           </li>
+          
           {% if user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'gestionar_cuenta' %}"
-              >Gestion Usuario, {{ user.username }}</a
+          <li>
+            <a class="nav-link text-LL display-1" href="\misdatos"
+              >{ { user.get_username } }</a
             >
           </li>
+        
+
           <li class="nav-item">
-            <form method="post" action="{% url 'logout' %}" class="nav-link">
+            <form method="POST" action="{% url 'logout' %}">
               {% csrf_token %}
-              <button
-                type="submit"
-                class="btn btn-link nav-link"
-                style="padding: 0; border: none; background: none"
-              >
-                Cerrar Sesión
-              </button>
+              <button type="submit" class="btn btn-danger">Logout</button>
             </form>
           </li>
+        
           {% else %}
           <li class="nav-item">
-            <a class="nav-link" href="<!--{ % url 'login' % }-->">Iniciar Sesión</a>
+            <a class="nav-link" href="<!--{ % url 'registro' % }-->">Regístrate</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-LL display-1" href="\accounts/login/"
+              >Login</a>
           </li>
           {% endif %}
+  
         </ul>
       </div>
     </div>
