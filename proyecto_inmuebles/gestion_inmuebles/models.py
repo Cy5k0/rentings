@@ -1,5 +1,6 @@
 from django.db import models
-#from django.contrib.auth.models import AbstractUser #User
+
+# from django.contrib.auth.models import AbstractUser #User
 
 from django.contrib.auth.models import User
 
@@ -107,18 +108,18 @@ class ImagenInmueble(models.Model):
 
 class TipoUsuario(models.Model):
     TIPOS_USUARIO = (
-        (0, "Nulo"),
-        (1, "arrendador"),
-        (2, "arrendatario"),
-        (3, "administrador"),
+        # ("0", "Nulo"),
+        ("1", "Arrendador"),
+        ("2", "Arrendatario"),
+        # ("3", "Administrador"),
     )
-    tipo = models.IntegerField(choices=TIPOS_USUARIO, default=0)
+    tipo = models.CharField(max_length=20, choices=TIPOS_USUARIO, default="Nulo")
 
-    def str(self):
+    def __str__(self):
         return self.get_tipo_display()
 
 
-#class Usuario(AbstractUser):
+# class Usuario(AbstractUser):
 #    id_nacional = models.CharField(
 #        max_length=20, unique=True
 #    )  # Identificador más general
@@ -138,38 +139,26 @@ class TipoUsuario(models.Model):
 #    def __str__(self):
 #        return f"{self.nombre} {self.apellido_paterno}"
 
+
 class PerfilUsuario(models.Model):
     user = models.OneToOneField(
-        User, 
-        on_delete=models.CASCADE, 
-        related_name="perfil"
+        User, on_delete=models.CASCADE, related_name="perfil"
     )  # Relación uno a uno con User
     telefono = models.CharField(
-        max_length=15, 
-        unique=False, 
-        blank=True, 
-        null=True
+        max_length=15, unique=False, blank=True, null=True
     )  # Campo adicional
     direccion = models.CharField(
-        max_length=150, 
-        blank=True, 
-        null=True
+        max_length=150, blank=True, null=True
     )  # Campo adicional
     id_nacional = models.CharField(
-        max_length=20, 
-        unique=True, 
-        blank=True, 
-        null=True
+        max_length=20, unique=True, blank=True, null=True
     )  # Identificador adicional
     tipo_usuario = models.ForeignKey(
-        TipoUsuario,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True
-    ) 
+        TipoUsuario, on_delete=models.SET_NULL, null=True, blank=True
+    )
+
     def __str__(self):
         return f"Perfil de {self.user.username}"
-
 
 
 class UsuarioInmueble(models.Model):
@@ -191,14 +180,8 @@ class Solicitud(models.Model):
         return f"{self.usuario.id_nacional} - {self.inmueble.nombre}"
 
 
-
-
-
-
 class ContactForm(models.Model):
-    contact_form_uuid =models.UUIDField(default=uuid.uuid4, editable=False) 
-    customer_name =models.CharField(max_length=64)
-    customer_email=models.EmailField()
-    message =models. TextField()
-
-
+    contact_form_uuid = models.UUIDField(default=uuid.uuid4, editable=False)
+    customer_name = models.CharField(max_length=64)
+    customer_email = models.EmailField()
+    message = models.TextField()
