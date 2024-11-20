@@ -1,5 +1,9 @@
 from django.db import models
+#from django.contrib.auth.models import AbstractUser #User
+
 from django.contrib.auth.models import User
+
+
 import uuid
 
 # Create your models here.
@@ -114,27 +118,62 @@ class TipoUsuario(models.Model):
         return self.get_tipo_display()
 
 
-class Usuario(User):
-    id_nacional = models.CharField(
-        max_length=20, unique=True
-    )  # Identificador más general
-    nombre = models.CharField(max_length=50, default="")
-    estado = models.BooleanField(default=True)
-    apellido_paterno = models.CharField(max_length=50, default="")
-    apellido_materno = models.CharField(max_length=50, default="")
-    correo_electronico = models.EmailField(unique=True, null=True, blank=True)
-    direccion = models.CharField(max_length=150)
-    telefono = models.CharField(
-        max_length=15, unique=True
-    )  # Aumentado a 15 para números internacionales
-    tipo_usuario = models.ForeignKey(TipoUsuario, on_delete=models.CASCADE)
+#class Usuario(AbstractUser):
+#    id_nacional = models.CharField(
+#        max_length=20, unique=True
+#    )  # Identificador más general
+#    nombre = models.CharField(max_length=50, default="")
+#    estado = models.BooleanField(default=True)
+#    apellido_paterno = models.CharField(max_length=50, default="")
+#    apellido_materno = models.CharField(max_length=50, default="")
+#    correo_electronico = models.EmailField(unique=True, null=True, blank=True)
+#    direccion = models.CharField(max_length=150)
+#    telefono = models.CharField(
+#        max_length=15, unique=True
+#    )  # Aumentado a 15 para números internacionales
+#    tipo_usuario = models.ForeignKey(TipoUsuario, on_delete=models.CASCADE)
 
-    def str(self):
-        return f"[{self.id_nacional}]"
+#    #def str(self):
+#    #    return f"[{self.id_nacional}]"
+#    def __str__(self):
+#        return f"{self.nombre} {self.apellido_paterno}"
+
+class PerfilUsuario(models.Model):
+    user = models.OneToOneField(
+        User, 
+        on_delete=models.CASCADE, 
+        related_name="perfil"
+    )  # Relación uno a uno con User
+    telefono = models.CharField(
+        max_length=15, 
+        unique=False, 
+        blank=True, 
+        null=True
+    )  # Campo adicional
+    direccion = models.CharField(
+        max_length=150, 
+        blank=True, 
+        null=True
+    )  # Campo adicional
+    id_nacional = models.CharField(
+        max_length=20, 
+        unique=True, 
+        blank=True, 
+        null=True
+    )  # Identificador adicional
+    tipo_usuario = models.ForeignKey(
+        TipoUsuario,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    ) 
+    def __str__(self):
+        return f"Perfil de {self.user.username}"
+
 
 
 class UsuarioInmueble(models.Model):
-    usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT)
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
     inmueble = models.ForeignKey(Inmueble, on_delete=models.PROTECT)
     fecha_inicio = models.DateField(null=True, blank=True)
     fecha_fin = models.DateField(null=True, blank=True)
@@ -145,7 +184,7 @@ class UsuarioInmueble(models.Model):
 
 class Solicitud(models.Model):
     inmueble = models.ForeignKey(Inmueble, on_delete=models.CASCADE)
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     estado = models.CharField(max_length=10, default="en espera")
 
     def __str__(self):

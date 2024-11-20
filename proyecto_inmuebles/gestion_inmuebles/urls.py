@@ -12,5 +12,5 @@ urlpatterns = [
     path("exito/", views.exito , name="exito"),
     #path("contactoM", views.contactoM , name="contactoM"),
     
-    #path('registro/', views.register, name='registro'),
+    path('registro/', views.register, name='registro'),
     ]
