@@ -1,5 +1,12 @@
 from django.shortcuts import render,redirect
 
+#login
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from .models import PerfilUsuario 
+#
+
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
@@ -22,8 +29,11 @@ from django.contrib.auth import login
 
 # Create your views here.
 def indice(request):
-  
-  return render(request,'index.html',{})
+    tusuario = request.session.get('tipo_usuario')
+    if not tusuario:
+        # Si no hay usuario en la sesión, redirigir al login
+        return render(request,'index.html',{'tusuario': tusuario})
+    return render(request,'index.html',{})
 
 def contacto(request):
     if request.method == 'GET':
@@ -54,10 +64,37 @@ def contacto(request):
 def exito(request):
     return render(request, "exito.html")
     
-  
+#version1  
+#def log_in(request):
+#    return render(request, "login.html", {})  
 def log_in(request):
+    if request.method == "POST":
+        # Captura de los datos del formulario
+        username = request.POST['username']
+        password = request.POST['password']
+
+        # Autenticación del usuario
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            # Si la autenticación es exitosa, iniciar sesión
+            login(request, user)
+            
+            # Obtener información del perfil del usuario
+            perfil = PerfilUsuario.objects.get(user=user)
+            
+            # Guardar nombre y tipo de usuario en la sesión
+            request.session['usuario'] = user.username
+            request.session['tipo_usuario'] = perfil.tipo_usuario 
+            
+            # Redirigir a la página principal o a otra página
+            return redirect('indice')  # Cambia 'pagina_principal' a la ruta de destino
+        else:
+            # Si la autenticación falla, muestra un mensaje de error
+            messages.error(request, "Su nombre de usuario y contraseña no coinciden. Inténtelo de nuevo.")
+    
+    # Si la petición es GET o hay un error, muestra la página de login
     return render(request, "login.html", {})  
-  
   
   
 #def register(request):

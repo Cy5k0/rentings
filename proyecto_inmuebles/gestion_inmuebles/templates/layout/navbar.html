@@ -31,14 +31,15 @@
             <a class="nav-link" style="color: black" href="/acerca/">Acerca de</a>
           </li>
 
-          <!--
-          { % if user.is_authenticated % }
+          
+          {% if  tusuario  %}
           <li class="nav-item">
-            <a class="nav-link" style="color: black" href="/bienvenido/"
-              >Bienvenido</a
+            <a class="nav-link" style="color: black" href="/arriendos/"
+              >Arriendos</a
             >
           </li>
-          { % endif % }-->
+          {% endif %}
+          
           <li class="nav-item">
             <a class="nav-link" style="color: black" href="/contacto/"
               >Contacto</a

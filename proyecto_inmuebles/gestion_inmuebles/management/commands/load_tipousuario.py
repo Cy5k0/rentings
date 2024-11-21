@@ -2,7 +2,7 @@ import csv
 from django.core.management.base import BaseCommand
 from gestion_inmuebles.models import TipoUsuario
 
-# Se ejecuta usando python manage.py test_client
+
 #para ejecutarlo, es en la terminal python manage.py load_tipousuario
 
 class Command(BaseCommand):

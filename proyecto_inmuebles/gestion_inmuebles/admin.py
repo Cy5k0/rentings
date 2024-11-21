@@ -1,16 +1,7 @@
 from django.contrib import admin
-from .models import (
-    Inmueble,
-    Pais,
-    EstadoProvincia,
-    Ciudad,
-    TipoInmueble,
-    Inmueble,
-    UsuarioInmueble,
-    Solicitud,
-    TipoUsuario,
-)
+
 from .models import ContactForm
+
 from django.contrib.auth.models import User
 
 from .models import (
@@ -22,8 +13,9 @@ from .models import (
     Inmueble,
     UsuarioInmueble,
     Solicitud,
-    TipoUsuario,
+    TipoUsuario,PerfilUsuario
 )
+
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -50,3 +42,4 @@ admin.site.register(UsuarioInmueble)
 admin.site.register(Solicitud)
 admin.site.register(ContactForm)
 admin.site.register(TipoUsuario)
+admin.site.register(PerfilUsuario)
