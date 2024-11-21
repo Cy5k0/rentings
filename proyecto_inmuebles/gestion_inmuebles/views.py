@@ -26,6 +26,12 @@ from .forms import RegistroForm
 from django.contrib.auth import login
 #from .forms import RegistroUser
 
+#buscador
+from django.http import JsonResponse
+from .models import Ciudad
+#
+
+
 
 # Create your views here.
 def indice(request):
@@ -37,16 +43,8 @@ def indice(request):
         request.session['tipo_usuario'] = perfil.tipo_usuario.tipo 
         tipo_usuario=request.session.get('tipo_usuario')
         print(tipo_usuario)
-        if tipo_usuario=='2':
-            #tipo_usuario = "Arrendador"
-            print(tipo_usuario)
-            return render(request, 'index.html', {'usuario': request.session.get('usuario'), 'Arrendador':tipo_usuario })
-
-        else:
-            #tipo_usuario = "Arrendatario"
-            return render(request, 'index.html', {'usuario': request.session.get('usuario'), 'Arrendatario':tipo_usuario })
-
-        
+        return render(request, 'index.html', {'usuario': request.session.get('usuario'), 'tipo_usuario':tipo_usuario })
+      
         #return render(request, 'index.html', {'usuario': request.session.get('usuario'), 'tipo_usuario':tipo_usuario })
 
     return render(request,'index.html',{})
@@ -63,6 +61,7 @@ def contacto(request):
         if form.is_valid():
           contact_form = ContactForm.objects.create(**form.cleaned_data)
           return HttpResponseRedirect('/exito/')
+      
     return render(request, 'contactoM.html', {'form': form})
   
 #def contactoM(request):
@@ -156,11 +155,31 @@ def register(request):
     return render(request, template_name="registration/register.html",  context={"form": form})
 
 
-def arrendador(request):
+
+
+
+def buscar_ciudades(request):
+    if request.is_ajax() and 'q' in request.GET:
+        query = request.GET.get('q')
+        ciudades = Ciudad.objects.filter(nombre__icontains=query).select_related('estado_provincia__pais')[:10]
+        resultados = [
+            {
+                'id': ciudad.id,
+                'nombre': ciudad.nombre,
+                'estado': ciudad.estado_provincia.nombre,
+                'pais': ciudad.estado_provincia.pais.nombre
+            }
+            for ciudad in ciudades
+        ]
+        return JsonResponse({'resultados': resultados})
+    return JsonResponse({'resultados': []})
+
+
+def arriendos(request):
     tusuario = request.session.get('tipo_usuario')
     if not tusuario:
         # Si no hay usuario en la sesión, redirigir al login
         return redirect('login')
-    return render(request, "arrendador.html")
+    return render(request, "arriendos.html")
 
 
