@@ -1,6 +1,6 @@
 # Proyecto: Sitio Web para Arriendo de Inmuebles
 
-#### [Ir a Hito 1](#hito-1) - [Ir a Hito 2](#hito-2)
+#### [Ir a Hito 1](#hito-1) - [Ir a Hito 1/2](#hito-2) - [Ir a Hito 2/2](#hito-2-segunda-parte)
 
 ## Hito 1
 
@@ -30,11 +30,11 @@ Este proyecto tiene como objetivo desarrollar un sitio web para una empresa dedi
 - **Actualizar**: Modificar información existente.
 - **Eliminar**: Borrar registros específicos.
 
----
-
 ## Importante:
 
 En el archivo **[hito1.pdf](hito1.pdf)** se encuentran los pantallazos solicitados en el hito 1
+
+---
 
 ## Hito 2
 
@@ -98,6 +98,62 @@ Sistema de administración para empresa de arriendo de inmuebles, enfocado en ge
 4. Realizar migraciones
 5. Crear superusuario
 6. Iniciar servidor de desarrollo
+
+---
+
+## Hito 2 (segunda parte)
+
+# Sistema de Autenticación de Usuarios - Arriendo de Inmuebles
+
+## 📌 Descripción del Proyecto
+
+Sistema de autenticación para empresa de arriendo de inmuebles con funcionalidades de:
+
+- Registro de usuarios
+- Inicio y cierre de sesión
+- Gestión de permisos y grupos
+
+## 🛠 Requisitos Técnicos
+
+### 1. Configuración de Autenticación
+
+- Incluir en `INSTALLED_APPS`:
+- `django.contrib.auth`
+- `django.contrib.contenttypes`
+- Configurar URLs de autenticación
+- Crear superusuario
+
+### 2. Vista de Registro
+
+- Usar `UserCreationForm`
+- Crear template HTML de registro
+- Validar registro de usuarios
+
+### 3. Vistas de Sesión
+
+- Implementar `LoginView`
+- Implementar `LogoutView`
+- Crear templates de login/logout
+
+### 4. Gestión de Permisos
+
+- Configurar permisos por usuario
+- Crear grupos con permisos específicos
+
+## 🚀 Configuración Inicial
+
+```bash
+# Instalar dependencias
+pip install django
+
+# Migrar base de datos
+python manage.py migrate
+
+# Crear superusuario
+python manage.py createsuperuser
+```
+
+**[🖥️ Ver documento PDF](Hito2b.pdf)**
 
 ## 👥Integrantes:
 
