@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect
 
 #login
-from django.contrib.auth import authenticate, login
-from django.contrib import messages
+#from django.contrib.auth import authenticate, login
+#from django.contrib import messages
 from .models import PerfilUsuario 
 #
 
@@ -29,11 +29,28 @@ from django.contrib.auth import login
 
 # Create your views here.
 def indice(request):
-    tusuario = request.session.get('tipo_usuario')
-    if not tusuario:
-        # Si no hay usuario en la sesión, redirigir al login
-        return render(request,'index.html',{'tusuario': tusuario})
+    if request.user.is_authenticated:
+        perfil = PerfilUsuario.objects.get(user=request.user)
+            
+        # Guardar el nombre de usuario y tipo de usuario en la sesión
+        request.session['usuario'] = request.user.username
+        request.session['tipo_usuario'] = perfil.tipo_usuario.tipo 
+        tipo_usuario=request.session.get('tipo_usuario')
+        print(tipo_usuario)
+        if tipo_usuario=='2':
+            #tipo_usuario = "Arrendador"
+            print(tipo_usuario)
+            return render(request, 'index.html', {'usuario': request.session.get('usuario'), 'Arrendador':tipo_usuario })
+
+        else:
+            #tipo_usuario = "Arrendatario"
+            return render(request, 'index.html', {'usuario': request.session.get('usuario'), 'Arrendatario':tipo_usuario })
+
+        
+        #return render(request, 'index.html', {'usuario': request.session.get('usuario'), 'tipo_usuario':tipo_usuario })
+
     return render(request,'index.html',{})
+
 
 def contacto(request):
     if request.method == 'GET':
@@ -67,34 +84,41 @@ def exito(request):
 #version1  
 #def log_in(request):
 #    return render(request, "login.html", {})  
-def log_in(request):
-    if request.method == "POST":
-        # Captura de los datos del formulario
-        username = request.POST['username']
-        password = request.POST['password']
+#def log_in(request):
+#    print('hola')
+#    if request.method == "POST":
+#        # Captura de los datos del formulario
+#        username = request.POST['username']
+#        password = request.POST['password']
 
-        # Autenticación del usuario
-        user = authenticate(request, username=username, password=password)
-        
-        if user is not None:
-            # Si la autenticación es exitosa, iniciar sesión
-            login(request, user)
-            
-            # Obtener información del perfil del usuario
-            perfil = PerfilUsuario.objects.get(user=user)
-            
-            # Guardar nombre y tipo de usuario en la sesión
-            request.session['usuario'] = user.username
-            request.session['tipo_usuario'] = perfil.tipo_usuario 
-            
-            # Redirigir a la página principal o a otra página
-            return redirect('indice')  # Cambia 'pagina_principal' a la ruta de destino
-        else:
-            # Si la autenticación falla, muestra un mensaje de error
-            messages.error(request, "Su nombre de usuario y contraseña no coinciden. Inténtelo de nuevo.")
-    
-    # Si la petición es GET o hay un error, muestra la página de login
-    return render(request, "login.html", {})  
+#        # Autenticación del usuario
+#        user = authenticate(request, username=username, password=password)
+#        
+#        if user is not None:
+#            # Si la autenticación es exitosa, iniciar sesión
+#            login(request, user)
+#            
+#            # Obtener información del perfil del usuario
+#            perfil = PerfilUsuario.objects.get(user=user)
+#            
+#            # Guardar nombre y tipo de usuario en la sesión
+#            request.session['usuario'] = user.username
+#            request.session['tipo_usuario'] = perfil.tipo_usuario
+#            print('hola')
+#            print("Entrando a la condición de sesión")
+#
+#            if 'usuario' in request.session:
+#                print(f"Usuario en sesión: {request.session['usuario']}")
+#            else:
+#                print("No hay usuario en la sesión")
+#            # Redirigir a la página principal o a otra página
+#            return redirect('indice')  # la ruta de destino
+#        else:
+#            # Si la autenticación falla, muestra un mensaje de error
+#            messages.error(request, "Su nombre de usuario y contraseña no coinciden. Inténtelo de nuevo.")
+#    
+#    # Si la petición es GET o hay un error, muestra la página de login
+#    return render(request, "login.html", {})  
   
   
 #def register(request):
@@ -130,3 +154,13 @@ def register(request):
     else:
         form = RegistroForm()
     return render(request, template_name="registration/register.html",  context={"form": form})
+
+
+def arrendador(request):
+    tusuario = request.session.get('tipo_usuario')
+    if not tusuario:
+        # Si no hay usuario en la sesión, redirigir al login
+        return redirect('login')
+    return render(request, "arrendador.html")
+
+
