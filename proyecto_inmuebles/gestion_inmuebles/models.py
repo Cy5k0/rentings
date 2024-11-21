@@ -78,7 +78,7 @@ class Inmueble(models.Model):
         max_digits=10, decimal_places=2
     )  # Cambio a DecimalField para mayor precisión
     moneda = models.CharField(
-        max_length=3
+        max_length=3,default="USD"
     )  # ISO 4217 currency code, e.g., 'USD', 'EUR'
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now=True)
@@ -96,6 +96,10 @@ class Inmueble(models.Model):
     )  # los agregue con el fin de usar eventualmente googlemaps para ubicacion
     disponible = models.BooleanField(default=True)
     tipo_inmueble = models.ForeignKey(TipoInmueble, on_delete=models.PROTECT)
+    propietario = models.ForeignKey(
+        User,null=False, blank=False,default="1",
+        on_delete=models.RESTRICT
+    )
 
     def __str__(self):
         return f"{self.nombre} - {self.direccion}"
@@ -161,14 +165,14 @@ class PerfilUsuario(models.Model):
         return f"Perfil de {self.user.username}"
 
 
-class UsuarioInmueble(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
-    inmueble = models.ForeignKey(Inmueble, on_delete=models.PROTECT)
-    fecha_inicio = models.DateField(null=True, blank=True)
-    fecha_fin = models.DateField(null=True, blank=True)
+#class UsuarioInmueble(models.Model):
+#    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
+#    inmueble = models.ForeignKey(Inmueble, on_delete=models.PROTECT)
+#    fecha_inicio = models.DateField(null=True, blank=True)
+#    fecha_fin = models.DateField(null=True, blank=True)
 
-    def __str__(self):
-        return f"{self.usuario.id_nacional} - {self.inmueble.nombre}"
+#    def __str__(self):
+#        return f"{self.usuario.id_nacional} - {self.inmueble.nombre}"
 
 
 class Solicitud(models.Model):

@@ -11,6 +11,6 @@ urlpatterns = [
     path("contacto/", views.contacto , name="contacto"),
     path("exito/", views.exito , name="exito"),
     path("arriendos/", views.arriendos , name="arriendos"),
-    
+    path('buscar-ciudades/', views.buscar_ciudades, name='buscar_ciudades'),
     path('registro/', views.register, name='registro'),
     ]

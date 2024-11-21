@@ -11,7 +11,6 @@ from .models import (
     Ciudad,
     TipoInmueble,
     Inmueble,
-    UsuarioInmueble,
     Solicitud,
     TipoUsuario,PerfilUsuario
 )
@@ -38,7 +37,6 @@ admin.site.register(EstadoProvincia)
 admin.site.register(Ciudad)
 admin.site.register(TipoInmueble)
 # admin.site.register(Usuario, UsuarioAdmin)
-admin.site.register(UsuarioInmueble)
 admin.site.register(Solicitud)
 admin.site.register(ContactForm)
 admin.site.register(TipoUsuario)

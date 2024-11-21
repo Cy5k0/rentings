@@ -1,20 +1,46 @@
 {% extends 'layout/base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Búsqueda de Ciudad</title>
-    <script src="{% static 'js/buscadorciudad.js' %}"></script> <!-- Incluye tu archivo JS -->
-</head>
-<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
      {% block content %}
-    <div>
-        <input type="text" id="buscar-ciudad" placeholder="Escribe una ciudad..." autocomplete="off">
-        <div id="resultados"></div>
-    </div>
+     <h1>Búsqueda de Ciudades</h1>
+     <input type="text" id="search-box" placeholder="Escribe el nombre de una ciudad...">
+     <div id="resultados"></div>
+   
+    <script>
+        $(document).ready(function() {
+            // Al escribir en el input, realiza la búsqueda AJAX después de 3 caracteres
+            $('#search-box').on('keyup', function() {
+                var query = $(this).val();
+                
+                // Realizar la búsqueda solo si hay al menos 3 caracteres
+                if (query.length >= 3) {
+                    $.ajax({
+                        url: '{% url "buscar_ciudades" %}',
+                        data: {
+                            'q': query
+                        },
+                        dataType: 'json',
+                        success: function(data) {
+                            var resultados = $('#resultados');
+                            resultados.empty();
+                            if (data.resultados.length > 0) {
+                                data.resultados.forEach(function(ciudad) {
+                                    resultados.append('<div>' + ciudad + '</div>');
+                                });
+                            } else {
+                                resultados.append('<div>No se encontraron resultados</div>');
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.log("Error en la solicitud AJAX:", error);
+                        }
+                    });
+                } else {
+                    // Limpiar resultados si hay menos de 3 caracteres
+                    $('#resultados').empty();
+                }
+            });
+        });
+    </script>   <!-- <script src="{% static 'js/buscadorciudad.js' %}"></script> --><!-- Incluye tu archivo JS -->
     {% endblock %}
-</body>
-</html>
