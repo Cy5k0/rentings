@@ -97,8 +97,7 @@ class Inmueble(models.Model):
     disponible = models.BooleanField(default=True)
     tipo_inmueble = models.ForeignKey(TipoInmueble, on_delete=models.PROTECT)
     propietario = models.ForeignKey(
-        User,
-        related_name='inmueble',
+        User,null=False, blank=False,default="1",
         on_delete=models.RESTRICT
     )
 
