@@ -119,12 +119,12 @@ class RegistroForm(UserCreationForm):
             if tipo_usuario:
                 if tipo_usuario.tipo == "1":  # Arrendador
                     grupo_arrendador, _ = Group.objects.get_or_create(
-                        name="arrendadores"
+                        name="Arrendadores"
                     )
                     user.groups.add(grupo_arrendador)
                 elif tipo_usuario.tipo == "2":  # Arrendatario
                     grupo_arrendatario, _ = Group.objects.get_or_create(
-                        name="arrendatarios"
+                        name="Arrendatarios"
                     )
                     user.groups.add(grupo_arrendatario)
 
