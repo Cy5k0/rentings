@@ -32,7 +32,7 @@
           </li>
 
           
-          {% if  Arrendador  %}
+          {% if request.session.tipo_usuario == "2" %}
           <li class="nav-item">
             <a class="nav-link" style="color: black" href="/arriendos/"
               >Arriendos</a
@@ -42,7 +42,7 @@
           
           <li class="nav-item">
             <a class="nav-link" style="color: black" href="/contacto/"
-              >Contacto{{Arrendatario}}xx</a
+              >Contacto{{request.session.tipo_usuario}}xx</a
             >
           </li>
           

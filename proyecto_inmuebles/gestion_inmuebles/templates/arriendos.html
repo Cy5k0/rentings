@@ -1,3 +1,6 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +10,11 @@
     <script src="{% static 'js/buscadorciudad.js' %}"></script> <!-- Incluye tu archivo JS -->
 </head>
 <body>
+     {% block content %}
     <div>
         <input type="text" id="buscar-ciudad" placeholder="Escribe una ciudad..." autocomplete="off">
         <div id="resultados"></div>
     </div>
+    {% endblock %}
 </body>
 </html>
