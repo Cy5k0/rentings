@@ -165,6 +165,8 @@ def buscar_ciudades(request):
         #firstname__startswith
         #ciudades = Ciudad.objects.filter(nombre__icontains=query).select_related('estado_provincia__pais')[:20]
         ciudades = Ciudad.objects.filter(nombre__startswith=query).select_related('estado_provincia__pais').order_by('nombre')[:20]
+        #resultados = [{'nombre': c.nombre, 'estado': c.estado, 'pais': c.pais} for c in ciudades]
+
         resultados = [
             {
                 'id': ciudad.id,
