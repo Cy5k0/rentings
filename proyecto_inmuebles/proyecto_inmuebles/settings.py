@@ -151,7 +151,7 @@ EMAIL_PORT = "2525"
 # manejo de sesiones
 SESSION_ENGINE = "django.contrib.sessions.backends.db"
 # Tiempo de expiración de la sesión en segundos (por defecto, las sesiones expiran al cerrar el navegador)
-SESSION_COOKIE_AGE = 30  # valor en segundos
+SESSION_COOKIE_AGE = 3000  # valor en segundos
 # Definir si la sesión debe expirar al cerrar el navegador
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 # Utilizar sesiones seguras solo a través de HTTPS

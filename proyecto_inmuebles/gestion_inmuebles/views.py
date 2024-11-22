@@ -159,14 +159,22 @@ def register(request):
 
 
 def buscar_ciudades(request):
-    # Verificar si es una solicitud AJAX y si hay un parámetro 'q' con al menos 3 caracteres
+    # Verificar si la solicitud es AJAX y si existe el parámetro 'q'
     if request.headers.get('x-requested-with') == 'XMLHttpRequest' and 'q' in request.GET:
         query = request.GET.get('q')
-        if len(query) >= 5:
-            ciudades = Ciudad.objects.filter(nombre__icontains=query)[:10] 
-            print(f"Ciudades encontradas: {ciudades}")
-            resultados = [ciudad.nombre for ciudad in ciudades]
-            return JsonResponse({'resultados': resultados})
+        #firstname__startswith
+        #ciudades = Ciudad.objects.filter(nombre__icontains=query).select_related('estado_provincia__pais')[:20]
+        ciudades = Ciudad.objects.filter(nombre__startswith=query).select_related('estado_provincia__pais').order_by('nombre')[:20]
+        resultados = [
+            {
+                'id': ciudad.id,
+                'nombre': ciudad.nombre,
+                'estado': ciudad.estado_provincia.nombre,
+                'pais': ciudad.estado_provincia.pais.nombre
+            }
+            for ciudad in ciudades
+        ]
+        return JsonResponse({'resultados': resultados})
     return JsonResponse({'resultados': []})
 
 
