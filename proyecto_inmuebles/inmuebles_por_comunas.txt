@@ -1,20 +1,59 @@
-Nombre: Casa Bella, Descripción: Hermosa casa con jardín, Comuna: Pucón
-Nombre: Departamento Moderno, Descripción: Departamento céntrico con terraza, Comuna: Temuco
-Nombre: Casa Familiar, Descripción: Casa amplia y luminosa, Comuna: Villarrica
-Nombre: Casa Rural, Descripción: Casa en zona tranquila, Comuna: Los Anjeles
-Nombre: Loft Urbano, Descripción: Loft moderno y funcional, Comuna: La Serena
-Nombre: Casa de Lujo, Descripción: Residencia con acabados premium, Comuna: Osorno
-Nombre: Departamento Compacto, Descripción: Ideal para parejas jóvenes, Comuna: Polloico
-Nombre: Casa Histórica, Descripción: Propiedad con valor patrimonial, Comuna: Puerto Octay
-Nombre: Cabaña Alpina, Descripción: Cabaña en zona montañosa, Comuna: Puerto Montt
-Nombre: Estudio Acogedor, Descripción: Pequeño estudio amoblado, Comuna: Puerto Varas
-Nombre: Casa Bella, Descripción: Hermosa casa con jardín, Comuna: Pucón
-Nombre: Departamento Moderno, Descripción: Departamento céntrico con terraza, Comuna: Temuco
-Nombre: Casa Familiar, Descripción: Casa amplia y luminosa, Comuna: Villarrica
-Nombre: Casa Rural, Descripción: Casa en zona tranquila, Comuna: Los Anjeles
-Nombre: Loft Urbano, Descripción: Loft moderno y funcional, Comuna: La Serena
-Nombre: Casa de Lujo, Descripción: Residencia con acabados premium, Comuna: Osorno
-Nombre: Departamento Compacto, Descripción: Ideal para parejas jóvenes, Comuna: Polloico
-Nombre: Casa Histórica, Descripción: Propiedad con valor patrimonial, Comuna: Puerto Octay
-Nombre: Cabaña Alpina, Descripción: Cabaña en zona montañosa, Comuna: Puerto Montt
-Nombre: Estudio Acogedor, Descripción: Pequeño estudio amoblado, Comuna: Puerto Varas
+COMUNA LA SERENA
+══════════════════════════════════════════════════
+► Loft Urbano
+  Loft moderno y funcional
+
+
+COMUNA LOS ANJELES
+══════════════════════════════════════════════════
+► Casa Rural
+  Casa en zona tranquila
+
+
+COMUNA OSORNO
+══════════════════════════════════════════════════
+► Casa de Lujo
+  Residencia con acabados premium
+
+
+COMUNA POLLOICO
+══════════════════════════════════════════════════
+► Departamento Compacto
+  Ideal para parejas jóvenes
+
+
+COMUNA PUCÓN
+══════════════════════════════════════════════════
+► Casa Bella
+  Hermosa casa con jardín
+
+
+COMUNA PUERTO MONTT
+══════════════════════════════════════════════════
+► Cabaña Alpina
+  Cabaña en zona montañosa
+
+
+COMUNA PUERTO OCTAY
+══════════════════════════════════════════════════
+► Casa Histórica
+  Propiedad con valor patrimonial
+
+
+COMUNA PUERTO VARAS
+══════════════════════════════════════════════════
+► Estudio Acogedor
+  Pequeño estudio amoblado
+
+
+COMUNA TEMUCO
+══════════════════════════════════════════════════
+► Departamento Moderno
+  Departamento céntrico con terraza
+
+
+COMUNA VILLARRICA
+══════════════════════════════════════════════════
+► Casa Familiar
+  Casa amplia y luminosa
+
