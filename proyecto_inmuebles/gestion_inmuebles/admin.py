@@ -12,7 +12,7 @@ from .models import (
     TipoInmueble,
     Inmueble,
     Solicitud,
-    TipoUsuario,PerfilUsuario
+    TipoUsuario,PerfilUsuario,ImagenInmueble
 )
 
 
@@ -32,6 +32,7 @@ admin.site.register(User, UserAdmin)  # Registrar User con la nueva configuraci√
 
 
 admin.site.register(Inmueble)
+admin.site.register(ImagenInmueble)
 admin.site.register(Pais)
 admin.site.register(EstadoProvincia)
 admin.site.register(Ciudad)

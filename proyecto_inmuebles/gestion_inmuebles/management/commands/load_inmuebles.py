@@ -16,9 +16,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         try:
-            # Obtener lista de arrendadores (tipo_usuario = 2) a través de PerfilUsuario
+            # Obtener lista de arrendadores (tipo_usuario = 2 u 7) a través de PerfilUsuario
             arrendadores = set(
-                User.objects.filter(perfil__tipo_usuario=2).values_list(
+                User.objects.filter(perfil__tipo_usuario=7).values_list(
                     "username", flat=True
                 )
             )

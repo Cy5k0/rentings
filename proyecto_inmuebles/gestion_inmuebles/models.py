@@ -102,7 +102,7 @@ class Inmueble(models.Model):
     )
 
     def __str__(self):
-        return f"{self.nombre} - {self.direccion}"
+        return f"{self.nombre} - {self.calle}"
 
 
 class ImagenInmueble(models.Model):
