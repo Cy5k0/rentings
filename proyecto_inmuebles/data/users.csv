@@ -1,11 +1,21 @@
 username;first_name;last_name;email;password;password_confirm;direccion;telefono;tipo_usuario
 12345678-9;Michael;Wittman;fmercury@mail.com;1234;1234;123 Queen St.;5555555;2
 23456789-0;Robert;Plant;rplant@mail.com;1234;1234;456 Rock Ln.;5555555;2
-34567890-1;James;Hetfield;jhetfield@mail.com;1234;1234;789 Metal Ave.;5555555;4
-45678901-2;Axl;Rose;arose@mail.com;1234;1234;321 Sunset Blvd.;5555555;4
+34567890-1;James;Hetfield;jhetfield@mail.com;1234;1234;789 Metal Ave.;5555555;2
+45678901-2;Axl;Rose;arose@mail.com;1234;1234;321 Sunset Blvd.;5555555;2
 56789012-3;Ozzy;Osbourne;oosbourne@mail.com;1234;1234;555 Paranoid Rd.;5555555;2
-67890123-4;Peter;Hansen;dgilmour@mail.com;1234;1234;777 Comfortably Numb St.;5555555;4
+67890123-4;Peter;Hansen;dgilmour@mail.com;1234;1234;777 Comfortably Numb St.;5555555;2
 78901234-5;Kurt;Cobain;kcobain@mail.com;1234;1234;999 Smells Like Teen Spirit Ave.;5555555;2
 89012345-6;Roger;Waters;rwaters@mail.com;1234;1234;444 The Wall Dr.;5555555;2
-90123456-7;Bruce;Dickinson;bdickinson@mail.com;1234;1234;222 Iron Maiden Blvd.;5555555;4
-01234567-8;Axl;Rose;ayoung@mail.com;1234;1234;666 Highway to Hell Rd.;5555555;2
+90123456-7;Bruce;Dickinson;bdickinson@mail.com;1234;1234;222 Iron Maiden Blvd.;5555555;2
+11234787-8;Axl;Rose;ayoung@mail.com;1234;1234;666 Highway to Hell Rd.;5555555;2
+12545678-9;Tony;Stark;tstark@starkindustries.com;1234;1234;10880 Malibu Point, Malibu, CA;5551234;4
+23434549-0;Bruce;Wayne;bwayne@wayneenterprises.com;1234;1234;1007 Mountain Dr., Gotham;5552345;4
+14567770-1;Diana;Prince;dprince@themyscira.com;1234;1234;Paradise Island, Themyscira;5553456;4
+25876901-2;Peter;Parker;pparker@dailybugle.com;1234;1234;20 Ingram St., Queens, NY;5554567;4
+16789012-3;Clark;Kent;ckent@dailyplanet.com;1234;1234;344 Clinton St., Metropolis;5555678;4
+17890113-4;Natasha;Romanoff;nromanoff@shield.com;1234;1234;SHIELD HQ, Washington D.C.;5556789;4
+28901234-5;Steve;Rogers;srogers@avengers.com;1234;1234;569 Lehigh St., Brooklyn, NY;5557890;4
+29888845-6;Leia;Organa;lorgana@rebellion.com;1234;1234;Echo Base, Hoth;5558901;4
+10177776-7;Han;Solo;hsolo@millenniumfalcon.com;1234;1234;Corellian Freighter MF, Space;5559012;4
+15151567-8;Luke;Skywalker;lskywalker@jediorder.com;1234;1234;Jedi Temple, Coruscant;5550123;4
