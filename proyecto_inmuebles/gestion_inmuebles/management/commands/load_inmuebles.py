@@ -1,6 +1,7 @@
 import csv
 from django.core.management.base import BaseCommand
-from gestion_inmuebles.models import Inmueble, Ciudad, TipoInmueble, User
+from django.db.models import Q
+from gestion_inmuebles.models import Inmueble, Ciudad, TipoInmueble, User, PerfilUsuario, TipoUsuario
 
 
 class Command(BaseCommand):
@@ -8,16 +9,44 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         try:
+            # Obtener todos los usuarios que son arrendadores (tipo_usuario 1)
+            arrendadores = User.objects.filter(
+                perfil__tipo_usuario__tipo='2' #tiene q ser el tipo arrendador
+            ).values_list('id', flat=True)
+
+            if not arrendadores:
+                raise Exception("No hay usuarios arrendadores registrados en el sistema")
+
             archivo = open("data/inmuebles.csv", "r", encoding="utf-8")
             reader = csv.reader(archivo, delimiter=";")
             next(reader)  # Salta la cabecera del CSV
 
-            for fila in reader:
-                # Obtener o crear las relaciones necesarias
-                ciudad = Ciudad.objects.get(id=fila[12])
-                tipo_inmueble = TipoInmueble.objects.get(id=fila[18])
-                propietario = User.objects.get(id=fila[19])
+            filas = list(reader)  # Convertir el reader a lista para contar registros
 
+            # Validar que no se intenten crear más inmuebles que arrendadores disponibles
+            if len(filas) > len(arrendadores):
+                raise Exception(
+                    f"No hay suficientes arrendadores. Hay {len(arrendadores)} arrendadores "
+                    f"disponibles para {len(filas)} inmuebles"
+                )
+
+            for fila in filas:
+                # Validar que el propietario sea arrendador
+                propietario_id = int(fila[19])
+                if propietario_id not in arrendadores:
+                    raise Exception(
+                        f"El usuario {propietario_id} no es un arrendador válido"
+                    )
+
+                # Obtener o crear las relaciones necesarias
+                try:
+                    ciudad = Ciudad.objects.get(id=fila[12])
+                    tipo_inmueble = TipoInmueble.objects.get(id=fila[18])
+                    propietario = User.objects.get(id=propietario_id)
+                except (Ciudad.DoesNotExist, TipoInmueble.DoesNotExist, User.DoesNotExist) as e:
+                    raise Exception(f"Error al obtener relaciones: {str(e)}")
+
+                # Crear el inmueble
                 Inmueble.objects.create(
                     nombre=fila[0],
                     descripcion=fila[1],
@@ -36,10 +65,15 @@ class Command(BaseCommand):
                     longitud=float(fila[15]) if fila[15] else None,
                     disponible=bool(fila[16]),
                     tipo_inmueble=tipo_inmueble,
-                    propietario=propietario,
+                    propietario=propietario
                 )
 
-            self.stdout.write(self.style.SUCCESS("Inmuebles cargados exitosamente"))
+            self.stdout.write(
+                self.style.SUCCESS(f'Se cargaron {len(filas)} inmuebles exitosamente')
+            )
 
         except Exception as e:
-            self.stdout.write(self.style.ERROR(f"Error al cargar inmuebles: {str(e)}"))
+            self.stdout.write(self.style.ERROR(f'Error al cargar inmuebles: {str(e)}'))
+        finally:
+            if 'archivo' in locals():
+                archivo.close()

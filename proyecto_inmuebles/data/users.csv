@@ -1,11 +1,11 @@
 username;first_name;last_name;email;password;password_confirm;direccion;telefono;tipo_usuario
-12345678-9;Michael;Wittman;fmercury@mail.com;1234;1234;123 Queen St.;5555555;7
-23456789-0;Robert;Plant;rplant@mail.com;1234;1234;456 Rock Ln.;5555555;8
-34567890-1;James;Hetfield;jhetfield@mail.com;1234;1234;789 Metal Ave.;5555555;7
-45678901-2;Axl;Rose;arose@mail.com;1234;1234;321 Sunset Blvd.;5555555;8
-56789012-3;Ozzy;Osbourne;oosbourne@mail.com;1234;1234;555 Paranoid Rd.;5555555;7
-67890123-4;Peter;Hansen;dgilmour@mail.com;1234;1234;777 Comfortably Numb St.;5555555;8
-78901234-5;Kurt;Cobain;kcobain@mail.com;1234;1234;999 Smells Like Teen Spirit Ave.;5555555;7
-89012345-6;Roger;Waters;rwaters@mail.com;1234;1234;444 The Wall Dr.;5555555;7
-90123456-7;Bruce;Dickinson;bdickinson@mail.com;1234;1234;222 Iron Maiden Blvd.;5555555;8
-01234567-8;Axl;Rose;ayoung@mail.com;1234;1234;666 Highway to Hell Rd.;5555555;8
+12345678-9;Michael;Wittman;fmercury@mail.com;1234;1234;123 Queen St.;5555555;2
+23456789-0;Robert;Plant;rplant@mail.com;1234;1234;456 Rock Ln.;5555555;2
+34567890-1;James;Hetfield;jhetfield@mail.com;1234;1234;789 Metal Ave.;5555555;4
+45678901-2;Axl;Rose;arose@mail.com;1234;1234;321 Sunset Blvd.;5555555;4
+56789012-3;Ozzy;Osbourne;oosbourne@mail.com;1234;1234;555 Paranoid Rd.;5555555;2
+67890123-4;Peter;Hansen;dgilmour@mail.com;1234;1234;777 Comfortably Numb St.;5555555;4
+78901234-5;Kurt;Cobain;kcobain@mail.com;1234;1234;999 Smells Like Teen Spirit Ave.;5555555;2
+89012345-6;Roger;Waters;rwaters@mail.com;1234;1234;444 The Wall Dr.;5555555;2
+90123456-7;Bruce;Dickinson;bdickinson@mail.com;1234;1234;222 Iron Maiden Blvd.;5555555;4
+01234567-8;Axl;Rose;ayoung@mail.com;1234;1234;666 Highway to Hell Rd.;5555555;2
