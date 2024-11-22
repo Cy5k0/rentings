@@ -1,0 +1,20 @@
+Nombre: Casa Bella, Descripción: Hermosa casa con jardín, Comuna: Pucón
+Nombre: Departamento Moderno, Descripción: Departamento céntrico con terraza, Comuna: Temuco
+Nombre: Casa Familiar, Descripción: Casa amplia y luminosa, Comuna: Villarrica
+Nombre: Casa Rural, Descripción: Casa en zona tranquila, Comuna: Los Anjeles
+Nombre: Loft Urbano, Descripción: Loft moderno y funcional, Comuna: La Serena
+Nombre: Casa de Lujo, Descripción: Residencia con acabados premium, Comuna: Osorno
+Nombre: Departamento Compacto, Descripción: Ideal para parejas jóvenes, Comuna: Polloico
+Nombre: Casa Histórica, Descripción: Propiedad con valor patrimonial, Comuna: Puerto Octay
+Nombre: Cabaña Alpina, Descripción: Cabaña en zona montañosa, Comuna: Puerto Montt
+Nombre: Estudio Acogedor, Descripción: Pequeño estudio amoblado, Comuna: Puerto Varas
+Nombre: Casa Bella, Descripción: Hermosa casa con jardín, Comuna: Pucón
+Nombre: Departamento Moderno, Descripción: Departamento céntrico con terraza, Comuna: Temuco
+Nombre: Casa Familiar, Descripción: Casa amplia y luminosa, Comuna: Villarrica
+Nombre: Casa Rural, Descripción: Casa en zona tranquila, Comuna: Los Anjeles
+Nombre: Loft Urbano, Descripción: Loft moderno y funcional, Comuna: La Serena
+Nombre: Casa de Lujo, Descripción: Residencia con acabados premium, Comuna: Osorno
+Nombre: Departamento Compacto, Descripción: Ideal para parejas jóvenes, Comuna: Polloico
+Nombre: Casa Histórica, Descripción: Propiedad con valor patrimonial, Comuna: Puerto Octay
+Nombre: Cabaña Alpina, Descripción: Cabaña en zona montañosa, Comuna: Puerto Montt
+Nombre: Estudio Acogedor, Descripción: Pequeño estudio amoblado, Comuna: Puerto Varas
