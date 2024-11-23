@@ -28,7 +28,7 @@ from django.contrib.auth import login
 
 #buscador
 from django.http import JsonResponse
-from .models import Ciudad
+from .models import Inmueble,Ciudad,ImagenInmueble
 #
 
 
@@ -157,27 +157,79 @@ def register(request):
 
 
 
+#version1
+#def buscar_ciudades(request):
+#    # Verificar si la solicitud es AJAX y si existe el parámetro 'q'
+#    if request.headers.get('x-requested-with') == 'XMLHttpRequest' and 'q' in request.GET:
+#        query = request.GET.get('q')
+#        #firstname__startswith
+#        #ciudades = Ciudad.objects.filter(nombre__icontains=query).select_related('estado_provincia__pais')[:20]
+#        ciudades = Ciudad.objects.filter(nombre__startswith=query).select_related('estado_provincia__pais').order_by('nombre')[:20]
+#        #resultados = [{'nombre': c.nombre, 'estado': c.estado, 'pais': c.pais} for c in ciudades]
 
+#        resultados = [
+#            {
+#                'id': ciudad.id,
+#                'nombre': ciudad.nombre,
+#                'estado': ciudad.estado_provincia.nombre,
+#                'pais': ciudad.estado_provincia.pais.nombre
+#            }
+#            for ciudad in ciudades
+#        ]
+#        return JsonResponse({'resultados': resultados})
+#    return JsonResponse({'resultados': []})
 def buscar_ciudades(request):
-    # Verificar si la solicitud es AJAX y si existe el parámetro 'q'
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest' and 'q' in request.GET:
-        query = request.GET.get('q')
-        #firstname__startswith
-        #ciudades = Ciudad.objects.filter(nombre__icontains=query).select_related('estado_provincia__pais')[:20]
-        ciudades = Ciudad.objects.filter(nombre__startswith=query).select_related('estado_provincia__pais').order_by('nombre')[:20]
-        #resultados = [{'nombre': c.nombre, 'estado': c.estado, 'pais': c.pais} for c in ciudades]
+    query = request.GET.get('q', '')
 
-        resultados = [
-            {
-                'id': ciudad.id,
-                'nombre': ciudad.nombre,
-                'estado': ciudad.estado_provincia.nombre,
-                'pais': ciudad.estado_provincia.pais.nombre
-            }
-            for ciudad in ciudades
-        ]
-        return JsonResponse({'resultados': resultados})
-    return JsonResponse({'resultados': []})
+    # Filtrar las ciudades con inmuebles disponibles
+    if query:
+        # inmuebles disponibles
+        ciudades = Ciudad.objects.filter(
+            nombre__icontains=query,
+            inmueble__disponible=True
+        ).distinct()
+    else:
+        ciudades = []
+
+    # Construir la lista de resultados con la jerarquía de Ciudad -> Estado -> País
+    resultados = [{
+        'nombre': ciudad.nombre,
+        'estado': ciudad.estado_provincia.nombre,
+        'pais': ciudad.estado_provincia.pais.nombre,
+        'id': ciudad.id
+    } for ciudad in ciudades]
+    
+    return JsonResponse({'resultados': resultados})
+
+
+
+def buscar_inmuebles(request):
+    ciudad_id = request.GET.get('ciudad_id')
+    
+    if ciudad_id:
+        # Filtrar inmuebles disponibles en la ciudad seleccionada 
+        inmuebles = Inmueble.objects.filter(ciudad_id=ciudad_id, disponible=True)
+    else:
+        inmuebles = Inmueble.objects.filter(disponible=True)  # listado de inmuebles de la ciudad seleccionada
+    
+    
+    # fotos del inmueble
+    inmuebles_con_imagenes = []
+    for inmueble in inmuebles:
+        imagenes = ImagenInmueble.objects.filter(propiedad=inmueble)
+        inmuebles_con_imagenes.append({
+            'inmueble': inmueble,
+            'imagenes': imagenes
+        })
+    
+    context = {
+        'inmuebles_con_imagenes': inmuebles_con_imagenes,
+        'ciudades': Ciudad.objects.all()  # Para mostrar las ciudades en el menú desplegable
+    }
+    
+    return render(request, 'arriendos.html', context)
+
+
 
 
 def arriendos(request):

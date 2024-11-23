@@ -39,3 +39,10 @@
     font-size: 1rem; /* Ajusta el tamaño que prefieras */
     color: black; /* Mantén el color negro si es necesario */
 }
+
+/*carrusel de propiedades*/
+#prop-min{
+  max-width: 150px; 
+  max-height: 150px; 
+  margin: auto;
+}
