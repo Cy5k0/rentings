@@ -27,12 +27,25 @@
               >Inicio</a
             >
           </li>
-          <li class="nav-item">
-            <a class="nav-link" style="color: black" href="/acerca/">Acerca de</a>
-          </li>
-
-          
+          <!--peter21 arrendatario
+           debe ingresar al dashboard, permitir ingresar,borrar, 
+          modificar  propiedad, aceptar o rechazar solicitud
+          peter18 arrendador  
+          debe mostrar el buscador de propiedades y permitir solicitar arriendo-->       
           {% if request.session.tipo_usuario == "2" %}
+          <li class="nav-item">
+            <a class="nav-link" style="color: black" href="/arrendatario/"
+              >Dashboard</a
+            >
+          </li>
+          {% endif %}
+
+          <!--peter21 arrendatario
+           debe ingresar al dashboard, permitir ingresar,borrar, 
+          modificar  propiedad, aceptar o rechazar solicitud
+          peter18 arrendador  
+          debe mostrar el buscador de propiedades y permitir solicitar arriendo-->
+          {% if request.session.tipo_usuario == "1" %}
           <li class="nav-item">
             <a class="nav-link" style="color: black" href="/arriendos/"
               >Arriendos</a
