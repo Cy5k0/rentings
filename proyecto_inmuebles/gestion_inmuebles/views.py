@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponse,HttpResponseRedirect
 from .models import ContactForm
-from .forms import ContactFormForm#,ContactFormModelForm#,CustomUserCreationForm,UserUpdateForm,PasswordForm
+from .forms import ContactFormForm,UserUpdateForm#,ContactFormModelForm#,CustomUserCreationForm,UserUpdateForm,PasswordForm
 #para registro usuarios
 #from django.contrib.auth import logout, authenticate, login
 
@@ -31,6 +31,8 @@ from django.http import JsonResponse
 from .models import Inmueble,Ciudad,ImagenInmueble
 #
 
+#misdatos
+from .models import PerfilUsuario
 
 
 # Create your views here.
@@ -240,3 +242,30 @@ def arriendos(request):
     return render(request, "arriendos.html")
 
 
+
+#actualizar datos del perfil
+def misdatos(request):
+    perfil = PerfilUsuario.objects.get(user=request.user)
+    
+    #se envia por parametro los 2 modelos
+    context = {
+        'user': request.user,  # Datos del user de django
+        'perfil': perfil  # Datos perfilusuario
+    }
+    return render(request, "misdatos.html", context)
+
+@login_required
+def update_profile(request):
+    if request.method == 'POST':
+        form = UserUpdateForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Tu perfil ha sido actualizado correctamente.')
+            return redirect('update_profile')
+    else:
+        form = UserUpdateForm(instance=request.user)
+
+    context = {
+        'form': form
+    }
+    return render(request, 'update_profile.html', context)

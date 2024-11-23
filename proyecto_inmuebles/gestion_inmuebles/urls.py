@@ -15,4 +15,6 @@ urlpatterns = [
     path('buscar-ciudades/', views.buscar_ciudades, name='buscar_ciudades'),
     path('buscar_inmuebles/', views.buscar_inmuebles, name='buscar_inmuebles'),
     path('registro/', views.register, name='registro'),
+    path("misdatos/", views.misdatos , name="misdatos"),
+    path('editar/', views.update_profile, name='update_profile'),
     ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
