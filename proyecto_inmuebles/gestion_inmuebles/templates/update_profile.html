@@ -1,5 +1,8 @@
 <!-- update_profile.html -->
-{% extends 'layout/base.html' %} {% block content %}{% load crispy_forms_tags %}
+{% extends 'layout/base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+
 <section id="misdatos" class="py-5">
   <div class="container">
     <div class="row justify-content-center">
@@ -9,7 +12,16 @@
             <h5 class="mb-0">Editar Perfil</h5>
           </div>
           <form method="POST">
-            {% csrf_token %} {{ form|crispy }}
+            {% csrf_token %}
+            <div class="card-body">
+              <!-- Formulario del Usuario -->
+              <h6 class="text-primary">Información Básica</h6>
+              {{ user_form|crispy }}
+
+              <!-- Formulario del Perfil -->
+              <h6 class="text-primary mt-4">Información Adicional</h6>
+              {{ perfil_form|crispy }}
+            </div>
             <div class="d-grid gap-2">
               <button type="submit" class="btn btn-primary btn-lg">
                 Guardar cambios

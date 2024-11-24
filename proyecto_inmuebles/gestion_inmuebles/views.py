@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponse,HttpResponseRedirect
 from .models import ContactForm
-from .forms import ContactFormForm,UserUpdateForm#,ContactFormModelForm#,CustomUserCreationForm,UserUpdateForm,PasswordForm
+from .forms import ContactFormForm,UserUpdateForm,PerfilUpdateForm #,ContactFormModelForm#,CustomUserCreationForm,UserUpdateForm,PasswordForm
 #para registro usuarios
 #from django.contrib.auth import logout, authenticate, login
 
@@ -246,26 +246,65 @@ def arriendos(request):
 #actualizar datos del perfil
 def misdatos(request):
     perfil = PerfilUsuario.objects.get(user=request.user)
-    
+    TIPOS_USUARIO = (
+        # ("0", "Nulo"),
+        ("1", "Arrendador"),
+        ("2", "Arrendatario"),
+        # ("3", "Administrador"),
+    )
+   # tipousuario = TIPOS_USUARIO.get (perfil.tipo_usuario.nombre, "Descripción no disponible")
+
     #se envia por parametro los 2 modelos
     context = {
         'user': request.user,  # Datos del user de django
         'perfil': perfil  # Datos perfilusuario
+        #,'tipo_usuario': tipousuario 
     }
     return render(request, "misdatos.html", context)
 
 @login_required
 def update_profile(request):
+    # Obtener o crear el perfil del usuario si no existe
+    perfil, created = PerfilUsuario.objects.get_or_create(user=request.user)
+
     if request.method == 'POST':
-        form = UserUpdateForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Tu perfil ha sido actualizado correctamente.')
+        user_form = UserUpdateForm(request.POST, instance=request.user)
+        perfil_form = PerfilUpdateForm(request.POST, instance=perfil)
+
+        if user_form.is_valid() and perfil_form.is_valid():
+            user_form.save()
+            perfil_form.save()
+            messages.success(request, 'Tu perfil ha sido actualizado.')
             return redirect('update_profile')
     else:
-        form = UserUpdateForm(instance=request.user)
+        user_form = UserUpdateForm(instance=request.user)
+        perfil_form = PerfilUpdateForm(instance=perfil)
 
     context = {
-        'form': form
+        'user_form': user_form,
+        'perfil_form': perfil_form
     }
     return render(request, 'update_profile.html', context)
+
+
+def mostrar_inmuebles(request):
+ 
+    inmuebles = Inmueble.objects.filter(propietario=request.user)
+    
+    
+    # fotos del inmueble
+    inmuebles_con_imagenes = []
+    for inmueble in inmuebles:
+        print(inmueble.pk)
+        imagenes = ImagenInmueble.objects.filter(propiedad=inmueble)
+        inmuebles_con_imagenes.append({
+            'inmueble': inmueble,
+            'imagenes': imagenes
+        })
+    
+    context = {
+        'inmuebles_con_imagenes': inmuebles_con_imagenes,
+#        'ciudades': Ciudad.objects.all()  # Para mostrar las ciudades en el menú desplegable
+    }
+    
+    return render(request, 'propiedades.html', context)

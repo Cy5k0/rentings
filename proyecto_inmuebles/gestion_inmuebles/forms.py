@@ -134,26 +134,37 @@ class RegistroForm(UserCreationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
-    telefono = forms.CharField(max_length=15, required=False)
-    direccion = forms.CharField(max_length=150, required=False)
-    id_nacional = forms.CharField(max_length=20, required=True)
-    tipo_usuario = forms.ModelChoiceField(
-        queryset=TipoUsuario.objects.all(),
-        required=False,
-        empty_label="Seleccione un tipo de usuario",
-    )
+    #telefono = forms.CharField(max_length=15, required=False)
+    #direccion = forms.CharField(max_length=150, required=False)
+    #id_nacional = forms.CharField(max_length=20, required=True)
+    #tipo_usuario = forms.ModelChoiceField(
+    #    queryset=TipoUsuario.objects.all(),
+    #    required=False,
+    #    empty_label="Seleccione un tipo de usuario",
+    #)
     class Meta:
         model = User
         # "password1", "password2", 'user_name',
-        fields = ['first_name', 'last_name', 'email' , 
-                 "telefono","direccion","id_nacional", "tipo_usuario"]
+        fields = ['first_name', 'last_name', 'email' ]
+                 #"telefono","direccion","id_nacional", "tipo_usuario"]
         widgets = {
 
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
+           # 'telefono': forms.TextInput(attrs={'class': 'form-control'}),
+            #'direccion': forms.TextInput(attrs={'class': 'form-control'}),
+            #'id_nacional': forms.TextInput(attrs={'class': 'form-control'}),
+            #'tipo_usuario': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+        
+class PerfilUpdateForm(forms.ModelForm):
+    class Meta:
+        model = PerfilUsuario
+        fields = ['telefono', 'direccion', 'id_nacional', 'tipo_usuario']
+        widgets = {
             'telefono': forms.TextInput(attrs={'class': 'form-control'}),
             'direccion': forms.TextInput(attrs={'class': 'form-control'}),
             'id_nacional': forms.TextInput(attrs={'class': 'form-control'}),
-            'tipo_usuario': forms.TextInput(attrs={'class': 'form-control'}),
-        }
+            'tipo_usuario': forms.Select(attrs={'class': 'form-control'}),
+        }        

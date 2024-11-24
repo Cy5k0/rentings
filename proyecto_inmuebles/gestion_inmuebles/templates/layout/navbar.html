@@ -33,11 +33,14 @@
           peter18 arrendador  
           debe mostrar el buscador de propiedades y permitir solicitar arriendo-->       
           {% if request.session.tipo_usuario == "2" %}
-          <li class="nav-item">
-            <a class="nav-link" style="color: black" href="/arrendatario/"
-              >Dashboard</a
-            >
-          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dashboard
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="/dashboard_prop/">Mis Propiedades</a></li>
+              <li><a class="dropdown-item" href="#">Solicitudes</a></li>
+            </ul>
           {% endif %}
 
           <!--peter21 arrendatario
@@ -55,8 +58,8 @@
           
           <li class="nav-item">
             <a class="nav-link" style="color: black" href="/contacto/"
-              >Contacto{{request.session.tipo_usuario}}xx</a
-            >
+              >Contacto</a
+            >  <!--{  {request.session.tipo_usuario} }xx-->
           </li>
           
           {% if user.is_authenticated %}

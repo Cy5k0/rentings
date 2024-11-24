@@ -1,0 +1,47 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+
+
+<h2>Mis Inmuebles</h2>
+<ul>
+    {% for item in inmuebles_con_imagenes %}
+    <li>
+        <strong>{{ item.inmueble.nombre }}</strong> - {{ item.inmueble.descripcion }} - ${{ item.inmueble.precio }} {{ item.inmueble.moneda }}
+        <br>
+        Dirección: {{ item.inmueble.calle }} {{ item.inmueble.numero }}, {{ item.inmueble.ciudad.nombre }}
+        
+        <!-- Carrusel de imágenes en miniatura -->
+        {% if item.imagenes %}
+        <div id="carousel-{{ forloop.counter }}" class="carousel slide" data-bs-ride="carousel" >
+            <div class="carousel-inner">
+                {% for imagen in item.imagenes %}
+                <div class="carousel-item  {% if forloop.first %}active{% endif %}" data-bs-interval="3000">
+                    <!--{ { imagen.imagen.url } }-->
+                    <!--<img id="prop_min" src="{ { imagen.imagen.url } }" class="d-block w-100" alt="Imagen de { { item.inmueble.nombre } }">-->
+                    <img id="prop-min" src="{{ imagen.imagen.url }}" class="d-block w-auto"  alt="Imagen de {{ item.inmueble.nombre }}">
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ forloop.counter }}" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ forloop.counter }}" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        {% else %}
+        <p>Imágenes no disponibles</p>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+{% endblock %}
