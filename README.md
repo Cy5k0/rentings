@@ -1,6 +1,6 @@
 # Proyecto: Sitio Web para Arriendo de Inmuebles
 
-#### [Ir a Hito 1](#hito-1) - [Ir a Hito 1/2](#hito-2) - [Ir a Hito 2/2](#hito-2-segunda-parte)
+#### [Ir a Hito 1](#hito-1) - [Ir a Hito 1/2](#hito-2) - [Ir a Hito 2/2](#hito-2-segunda-parte) - [Ir a Hito 3](#hito-3)
 
 ## Hito 1
 
@@ -154,6 +154,56 @@ python manage.py createsuperuser
 ```
 
 **[🖥️ Ver documento PDF](Hito2b.pdf)**
+
+## Hito 3
+
+## Descripción del Proyecto
+
+Aplicación web para revisar inmuebles disponibles para arriendo, desarrollada para una empresa especializada en administración de propiedades.
+
+## Requerimientos del Proyecto
+
+### 1. Migraciones de Base de Datos
+
+- Poblar base de datos con:
+  - Regiones y comunas de Chile
+  - Tipos de inmuebles
+  - Inmuebles de ejemplo
+  - Usuarios de ejemplo
+
+### 2. Scripts de Consulta
+
+#### Consulta de Inmuebles por Comuna
+
+- Script Python para:
+  - Conectarse a la base de datos usando Django y SQL
+  - Recuperar campos "nombre" y "descripción" de inmuebles
+  - Guardar resultados en archivo de texto
+
+#### Consulta de Inmuebles por Región
+
+- Script Python para:
+  - Conectarse a la base de datos usando Django y SQL
+  - Recuperar inmuebles agrupados por región
+  - Guardar resultados en archivo de texto
+
+## Tecnologías Utilizadas
+
+- Python
+- Django
+- SQL
+- Base de datos (especificada en el proyecto)
+
+## Instrucciones de Instalación
+
+1. Clonar repositorio
+2. Configurar entorno virtual
+3. Instalar dependencias
+4. Configurar base de datos
+5. Ejecutar migraciones
+6. Poblar datos iniciales
+
+**[🖥️ Ver documento PDF](Hito3.pdf)**
 
 ## 👥Integrantes:
 

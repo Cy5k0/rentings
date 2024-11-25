@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="proyecto-sitio-web-para-arriendo-de-inmuebles">Proyecto: Sitio Web para Arriendo de Inmuebles</h1>
+<h4 id="ir-a-hito-1---ir-a-hito-12---ir-a-hito-22"><a href="#hito-1">Ir a Hito 1</a> - <a href="#hito-2">Ir a Hito 1/2</a> - <a href="#hito-2-segunda-parte">Ir a Hito 2/2</a></h4>
+<h2 id="hito-1">Hito 1</h2>
+<p>Este proyecto tiene como objetivo desarrollar un sitio web para una empresa dedicada al arriendo de inmuebles, permitiendo a los usuarios revisar viviendas disponibles. El sistema utiliza <strong>Django</strong> como framework web y <strong>PostgreSQL</strong> como base de datos.</p>
+<hr>
+<h2 id="caracter%C3%ADsticas-del-proyecto">Características del Proyecto</h2>
+<h3 id="1-instalaci%C3%B3n-y-configuraci%C3%B3n-del-ambiente-de-desarrollo">1. Instalación y Configuración del Ambiente de Desarrollo</h3>
+<ul>
+<li><strong>PostgreSQL</strong>: Configuración como sistema de base de datos.</li>
+<li><strong>Ambiente virtual de Python</strong>: Aislamiento del entorno de desarrollo.</li>
+<li><strong>Paquetes necesarios</strong>: Instalación de dependencias para trabajar con Django.</li>
+<li><strong>Aplicación Django</strong>: Implementación de la lógica del sitio web.</li>
+</ul>
+<h3 id="2-modelo-de-datos">2. Modelo de Datos</h3>
+<ul>
+<li><strong>Modelo relacional</strong>: Diseño de tablas relacionadas para inmuebles y sus atributos.</li>
+<li><strong>Conexión a PostgreSQL</strong>: Configuración de la base de datos en <code>settings.py</code>.</li>
+<li><strong>Llaves primarias y foráneas</strong>: Implementación para garantizar integridad referencial.</li>
+</ul>
+<h3 id="3-operaciones-crud-en-django">3. Operaciones CRUD en Django</h3>
+<ul>
+<li><strong>Crear</strong>: Añadir nuevos registros de inmuebles.</li>
+<li><strong>Leer</strong>: Listar registros almacenados.</li>
+<li><strong>Actualizar</strong>: Modificar información existente.</li>
+<li><strong>Eliminar</strong>: Borrar registros específicos.</li>
+</ul>
+<h2 id="importante">Importante:</h2>
+<p>En el archivo <strong><a href="hito1.pdf">hito1.pdf</a></strong> se encuentran los pantallazos solicitados en el hito 1</p>
+<hr>
+<h2 id="hito-2">Hito 2</h2>
+<h1 id="gesti%C3%B3n-de-inmuebles---panel-administrativo-django">Gestión de Inmuebles - Panel Administrativo Django</h1>
+<h2 id="%F0%9F%93%8B-descripci%C3%B3n-del-proyecto">📋 Descripción del Proyecto</h2>
+<p>Sistema de administración para empresa de arriendo de inmuebles, enfocado en gestionar eficientemente datos de inmuebles, regiones y comunas.</p>
+<h2 id="%F0%9F%8E%AF-objetivos">🎯 Objetivos</h2>
+<ul>
+<li>Se crea panel de administración personalizado</li>
+<li>Se registra modelos de Inmueble, Región y Comuna, entre otros.</li>
+<li>Optimización de visualización y gestión de datos</li>
+</ul>
+<h2 id="%F0%9F%93%9D-requerimientos">📝 Requerimientos</h2>
+<h3 id="1-creaci%C3%B3n-de-superusuario">1. Creación de Superusuario</h3>
+<ul>
+<li>Generación de superusuario para acceso al panel</li>
+<li>Configurar:</li>
+<li>Nombre de usuario</li>
+<li>Correo electrónico</li>
+<li>Contraseña segura</li>
+</ul>
+<h3 id="2-registro-de-modelos-en-admin">2. Registro de Modelos en Admin</h3>
+<ul>
+<li>Registrar en <code>admin.py</code>:</li>
+<li>Modelo Inmueble</li>
+<li>Modelo Región</li>
+<li>Modelo Comuna</li>
+<li>Método: <code>admin.site.register()</code></li>
+</ul>
+<h3 id="3-personalizaci%C3%B3n-del-panel">3. Personalización del Panel</h3>
+<ul>
+<li>Implementación configuraciones:</li>
+<li><code>list_display</code></li>
+<li><code>search_fields</code></li>
+<li><code>list_filter</code></li>
+</ul>
+<h3 id="4-documentaci%C3%B3n">4. Documentación</h3>
+<ul>
+<li>Documentación proceso de configuración</li>
+<li>Incluir capturas de pantalla</li>
+</ul>
+<p><strong><a href="hito2.pdf">Ver documento PDF</a></strong></p>
+<h2 id="%F0%9F%9B%A0%EF%B8%8F-configuraci%C3%B3n-del-proyecto">🛠️ Configuración del Proyecto</h2>
+<h3 id="requisitos">Requisitos</h3>
+<ul>
+<li>Python 3.x</li>
+<li>Django</li>
+<li>Entorno virtual</li>
+</ul>
+<h3 id="instalaci%C3%B3n">Instalación</h3>
+<ol>
+<li>Clonar repositorio</li>
+<li>Crear entorno virtual</li>
+<li>Instalar dependencias</li>
+<li>Realizar migraciones</li>
+<li>Crear superusuario</li>
+<li>Iniciar servidor de desarrollo</li>
+</ol>
+<hr>
+<h2 id="hito-2-segunda-parte">Hito 2 (segunda parte)</h2>
+<h1 id="sistema-de-autenticaci%C3%B3n-de-usuarios---arriendo-de-inmuebles">Sistema de Autenticación de Usuarios - Arriendo de Inmuebles</h1>
+<h2 id="%F0%9F%93%8C-descripci%C3%B3n-del-proyecto">📌 Descripción del Proyecto</h2>
+<p>Sistema de autenticación para empresa de arriendo de inmuebles con funcionalidades de:</p>
+<ul>
+<li>Registro de usuarios</li>
+<li>Inicio y cierre de sesión</li>
+<li>Gestión de permisos y grupos</li>
+</ul>
+<h2 id="%F0%9F%9B%A0-requisitos-t%C3%A9cnicos">🛠 Requisitos Técnicos</h2>
+<h3 id="1-configuraci%C3%B3n-de-autenticaci%C3%B3n">1. Configuración de Autenticación</h3>
+<ul>
+<li>Incluir en <code>INSTALLED_APPS</code>:</li>
+<li><code>django.contrib.auth</code></li>
+<li><code>django.contrib.contenttypes</code></li>
+<li>Configurar URLs de autenticación</li>
+<li>Crear superusuario</li>
+</ul>
+<h3 id="2-vista-de-registro">2. Vista de Registro</h3>
+<ul>
+<li>Usar <code>UserCreationForm</code></li>
+<li>Crear template HTML de registro</li>
+<li>Validar registro de usuarios</li>
+</ul>
+<h3 id="3-vistas-de-sesi%C3%B3n">3. Vistas de Sesión</h3>
+<ul>
+<li>Implementar <code>LoginView</code></li>
+<li>Implementar <code>LogoutView</code></li>
+<li>Crear templates de login/logout</li>
+</ul>
+<h3 id="4-gesti%C3%B3n-de-permisos">4. Gestión de Permisos</h3>
+<ul>
+<li>Configurar permisos por usuario</li>
+<li>Crear grupos con permisos específicos</li>
+</ul>
+<h2 id="%F0%9F%9A%80-configuraci%C3%B3n-inicial">🚀 Configuración Inicial</h2>
+<pre class="hljs"><code><div><span class="hljs-comment"># Instalar dependencias</span>
+pip install django
+
+<span class="hljs-comment"># Migrar base de datos</span>
+python manage.py migrate
+
+<span class="hljs-comment"># Crear superusuario</span>
+python manage.py createsuperuser
+</div></code></pre>
+<p><strong><a href="Hito2b.pdf">🖥️ Ver documento PDF</a></strong></p>
+<h2 id="%F0%9F%91%A5integrantes">👥Integrantes:</h2>
+<ul>
+<li><a href="https://github.com/Cy5k0">Francisco Colomer</a></li>
+<li><a href="https://github.com/agonzalezr92">Arlenis González</a></li>
+<li><a href="https://github.com/fmonroy75">Francisco Monroy</a></li>
+</ul>
+
+</body>
+</html>
