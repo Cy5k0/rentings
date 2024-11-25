@@ -1,0 +1,86 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<section id="propiedad">
+<h2>Propiedad</h2>
+<a href="{% url 'agregar_propiedad' %}">Agregar Inmuebles</a>
+<ul>
+
+    <li>
+        <strong>{{ tipoinmueble.nombre }}</strong>
+        <br>
+        <strong>{{ inmueble.nombre }}</strong> - {{ inmueble.descripcion }} - {{ inmueble.precio }} {{ inmueble.moneda }}
+        <br>
+        Dirección: {{ inmueble.calle }} {{ inmueble.numero }}, {{ inmueble.ciudad.nombre }}
+        <br>
+        m2 construidos:  {{ inmueble.m2_construidos }} - m2 totales : {{ inmueble.m2_totales }}
+        <br>
+        estacionamientos : {{ inmueble.n_estacionamientos }}
+        <br>
+        habitaciones : {{ inmueble.n_habitaciones }} -  baños : {{ inmueble.n_baños }}
+
+        <br><a href="">Modificar Inmuebles</a>--<a href="">Agregar Fotografia</a>
+        <!-- Carrusel de imágenes en miniatura -->
+        {% if imagenes %}
+            <div class="row">
+                
+                {% for imagen in imagenes %}
+                    <!-- para manipular un contador de elementos y saber donde agregar fila-->
+                    {% if forloop.counter0|divisibleby:4 and not forloop.first %}
+                        </div><div class="row">
+                    {% endif %}
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                    <div class="card">
+                        <div class="card-body">
+                        <h5 class="card-title">Foto {{ i }}</h5>
+                        <img id="prop-min" src="{{ imagen.imagen.url }}" class="d-block w-auto"  alt="Imagen de {{ item.inmueble.nombre }}">
+                        <a href="#" class="btn btn-primary">Eliminar Foto</a>
+                        </div>
+                    </div>
+                    </div>
+                   
+                {% endfor %}    
+  
+            </div>
+
+
+
+        {% else %}
+        <p>Imágenes no disponibles</p>
+        {% endif %}
+    </li>
+
+</ul>
+</section>
+<section id="foto">
+
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-6">
+              <div class="card shadow-lg">
+                <div class="card-header text-center bg-primary text-white">
+                  <h5 class="mb-0">Agregar Fotos</h5>
+                </div>
+                <form method="POST">
+                  {% csrf_token %}
+                    <!-- Formulario del Perfil -->
+                    {{ perfil_form|crispy }}
+                  </div>
+                  <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                      Guardar cambios
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+</section>
+
+
+{% endblock %}

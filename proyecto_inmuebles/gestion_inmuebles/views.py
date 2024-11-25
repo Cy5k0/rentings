@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404  #get_object_or_404 para filtrar un elemento
 
 #login
 #from django.contrib.auth import authenticate, login
@@ -28,7 +28,7 @@ from django.contrib.auth import login
 
 #buscador
 from django.http import JsonResponse
-from .models import Inmueble,Ciudad,ImagenInmueble
+from .models import Inmueble,Ciudad,ImagenInmueble,TipoInmueble
 #
 
 #misdatos
@@ -297,9 +297,12 @@ def mostrar_inmuebles(request):
     for inmueble in inmuebles:
         print(inmueble.pk)
         imagenes = ImagenInmueble.objects.filter(propiedad=inmueble)
+        tipoinmueble = inmueble.tipo_inmueble
+        #tipoinmueble = TipoInmueble.objects.filter(TipoInmueble =inmuebles.tipo_inmueble)
         inmuebles_con_imagenes.append({
             'inmueble': inmueble,
-            'imagenes': imagenes
+            'imagenes': imagenes,
+            'tipoinmueble': tipoinmueble
         })
     
     context = {
@@ -308,3 +311,36 @@ def mostrar_inmuebles(request):
     }
     
     return render(request, 'propiedades.html', context)
+
+
+def add_inmuebles(request):
+    if request.method == "POST":
+#        titulo = request.POST["titulo"]
+#        contenido = request.POST["contenido"]
+#        nuevo_post = Post(
+#            titulo=titulo, contenido=contenido, fecha_publicacion=datetime.now()
+#        )
+#        nuevo_post.save()
+        return redirect("dashboard_prop")
+    return render(request, "add_propiedad.html")
+
+
+def mostrar_un_inmuebles(request,inmueble_id):
+ 
+    inmuebles = get_object_or_404(Inmueble, pk=inmueble_id, propietario=request.user)
+    
+    
+    # fotos del inmueble
+    print(inmuebles.pk)
+    imagenes = ImagenInmueble.objects.filter(propiedad=inmuebles)
+    tipoinmueble = inmuebles.tipo_inmueble
+    #tipoinmueble = TipoInmueble.objects.filter(TipoInmueble =inmuebles.tipo_inmueble)
+    context={
+        'inmueble': inmuebles,
+        'imagenes': imagenes,
+        'tipoinmueble': tipoinmueble
+    }
+    
+ 
+    
+    return render(request, 'add_fotoinmueble.html', context)

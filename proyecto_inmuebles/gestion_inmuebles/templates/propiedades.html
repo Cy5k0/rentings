@@ -6,14 +6,23 @@
 
 
 <h2>Mis Inmuebles</h2>
-<a href="">Agregar Inmuebles</a>
+<a href="{% url 'agregar_propiedad' %}">Agregar Inmuebles</a>
 <ul>
     {% for item in inmuebles_con_imagenes %}
     <li>
-        <strong>{{ item.inmueble.nombre }}</strong> - {{ item.inmueble.descripcion }} - ${{ item.inmueble.precio }} {{ item.inmueble.moneda }}
+        <strong>{{ item.tipoinmueble.nombre }}</strong>
+        <br>
+        <strong>{{ item.inmueble.nombre }}</strong> - {{ item.inmueble.descripcion }} - {{ item.inmueble.precio }} {{ item.inmueble.moneda }}
         <br>
         Dirección: {{ item.inmueble.calle }} {{ item.inmueble.numero }}, {{ item.inmueble.ciudad.nombre }}
-        <br><a href="">Modificar Inmuebles</a>--<a href="">Agregar Fotografia</a>
+        <br>
+        m2 construidos:  {{ item.inmueble.m2_construidos }} - m2 totales : {{ item.inmueble.m2_totales }}
+        <br>
+        estacionamientos : {{ item.inmueble.n_estacionamientos }}
+        <br>
+        habitaciones : {{ item.inmueble.n_habitaciones }} -  baños : {{ item.inmueble.n_baños }}
+        {{item.inmueble.pk}}
+        <br><a href="">Modificar Inmuebles</a>--<a href="{% url 'mostrar_un_inmuebles' item.inmueble.pk  %}">Agregar Fotografia</a>
         <!-- Carrusel de imágenes en miniatura -->
         {% if item.imagenes %}
             <div class="row">

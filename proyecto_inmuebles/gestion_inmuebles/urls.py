@@ -19,4 +19,6 @@ urlpatterns = [
     path('editar/', views.update_profile, name='update_profile'),
     
     path('dashboard_prop/', views.mostrar_inmuebles, name='dashboard_prop'),
+    path('add_propiedad/', views.add_inmuebles, name='agregar_propiedad'),
+    path('mostrar_un_inmuebles/<int:inmueble_id>/', views.mostrar_un_inmuebles, name='mostrar_un_inmuebles'),
     ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
