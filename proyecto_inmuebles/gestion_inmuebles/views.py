@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponse,HttpResponseRedirect
 from .models import ContactForm
-from .forms import ContactFormForm,UserUpdateForm,PerfilUpdateForm #,ContactFormModelForm#,CustomUserCreationForm,UserUpdateForm,PasswordForm
+from .forms import ContactFormForm,UserUpdateForm,PerfilUpdateForm,FotoInmuebleForm #,ContactFormModelForm#,CustomUserCreationForm,UserUpdateForm,PasswordForm
 #para registro usuarios
 #from django.contrib.auth import logout, authenticate, login
 
@@ -329,18 +329,36 @@ def mostrar_un_inmuebles(request,inmueble_id):
  
     inmuebles = get_object_or_404(Inmueble, pk=inmueble_id, propietario=request.user)
     
-    
-    # fotos del inmueble
+    if request.method == 'POST':
+        form = FotoInmuebleForm(request.POST, request.FILES)
+        files = request.FILES['imagen']
+        
+        if form.is_valid():
+            print('entro')
+            imagen = form.cleaned_data['imagen'] 
+            ImagenInmueble.objects.create(propiedad=inmuebles, imagen=imagen)
+            messages.success(request, 'La foto se ha agregado correctamente.')
+            return redirect('mostrar_un_inmuebles', inmueble_id=inmueble_id)  # Redirigir a mostrar detalles
+        else:
+            messages.error(request, 'Hubo un error al intentar guardar la imagen.')
+            
+            
+    else:
+        form = FotoInmuebleForm()
+       
+     # fotos del inmueble
     print(inmuebles.pk)
     imagenes = ImagenInmueble.objects.filter(propiedad=inmuebles)
     tipoinmueble = inmuebles.tipo_inmueble
+    form = FotoInmuebleForm()
+        
     #tipoinmueble = TipoInmueble.objects.filter(TipoInmueble =inmuebles.tipo_inmueble)
     context={
         'inmueble': inmuebles,
         'imagenes': imagenes,
-        'tipoinmueble': tipoinmueble
+        'tipoinmueble': tipoinmueble,
+        'form': form
     }
-    
- 
+       
     
     return render(request, 'add_fotoinmueble.html', context)
