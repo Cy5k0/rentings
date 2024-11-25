@@ -1,46 +1,56 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container-fluid">
-        
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div
-        class="collapse navbar-collapse justify-content-end"
-        id="navbarSupportedContent"
-      >
-        <ul class="navbar-nav mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a
-              class="nav-link active"
-              style="color: black"
-              aria-current="page"
-              href="/"
-              >Inicio</a
-            >
-          </li>
-          <!--peter21 arrendatario
+  <div class="container-fluid">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse justify-content-end"
+      id="navbarSupportedContent"
+    >
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            style="color: black"
+            aria-current="page"
+            href="/"
+            >Inicio</a
+          >
+        </li>
+        <!--peter21 arrendatario
            debe ingresar al dashboard, permitir ingresar,borrar, 
           modificar  propiedad, aceptar o rechazar solicitud
           peter18 arrendador  
-          debe mostrar el buscador de propiedades y permitir solicitar arriendo-->       
-          {% if request.session.tipo_usuario == "2" %}
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dashboard
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="/dashboard_prop/">Mis Propiedades</a></li>
-              <li><a class="dropdown-item" href="#">Solicitudes</a></li>
-            </ul>
+          debe mostrar el buscador de propiedades y permitir solicitar arriendo-->
+        {% if request.session.tipo_usuario == "2" %}
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdownMenuLink"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Dashboard
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li>
+              <a class="dropdown-item" href="/dashboard_prop/"
+                >Mis Propiedades</a
+              >
+            </li>
+            <li><a class="dropdown-item" href="#">Solicitudes</a></li>
+          </ul>
           {% endif %}
 
           <!--peter21 arrendatario
@@ -48,45 +58,49 @@
           modificar  propiedad, aceptar o rechazar solicitud
           peter18 arrendador  
           debe mostrar el buscador de propiedades y permitir solicitar arriendo-->
-          {% if request.session.tipo_usuario == "1" %}
-          <li class="nav-item">
-            <a class="nav-link" style="color: black" href="/arriendos/"
-              >Arriendos</a
-            >
-          </li>
-          {% endif %}
-          
-          <li class="nav-item">
-            <a class="nav-link" style="color: black" href="/contacto/"
-              >Contacto</a
-            >  <!--{  {request.session.tipo_usuario} }xx-->
-          </li>
-          
-          {% if user.is_authenticated %}
-          <li>
-            <a class="nav-link nav-link-custom" href="\misdatos"
-              >{{ user.get_username }}</a
-            >
-          </li>
-        
+          {% if request.session.tipo_usuario == "4" %}
+          <!---HABIA UN 1 aqui en vez de un 4-->
+        </li>
 
-          <li class="nav-item">
-            <form method="POST" action="{% url 'logout' %}">
-              {% csrf_token %}
-              <button type="submit" class="btn btn-danger">Logout</button>
-            </form>
-          </li>
-        
-          {% else %}
-          <li class="nav-item">
-            <!--<a class="nav-link" href="{ % url 'registro' % }">Regístrate</a>-->
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-link-custom" href="/accounts/login/">Login/Registro</a>
-          </li>
-          {% endif %}
-  
-        </ul>
-      </div>
+        <li class="nav-item">
+          <a class="nav-link" style="color: black" href="/arriendos/"
+            >Arriendos</a
+          >
+        </li>
+        {% endif %}
+
+        <li class="nav-item">
+          <a class="nav-link" style="color: black" href="/contacto/"
+            >Contacto</a
+          >
+          <!--{  {request.session.tipo_usuario} }xx-->
+        </li>
+
+        {% if user.is_authenticated %}
+        <li>
+          <a class="nav-link nav-link-custom" href="\misdatos"
+            >{{ user.get_username }}</a
+          >
+        </li>
+
+        <li class="nav-item">
+          <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Logout</button>
+          </form>
+        </li>
+
+        {% else %}
+        <li class="nav-item">
+          <!--<a class="nav-link" href="{ % url 'registro' % }">Regístrate</a>-->
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-custom" href="/accounts/login/"
+            >Login/Registro</a
+          >
+        </li>
+        {% endif %}
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
