@@ -1,0 +1,21 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>{% if post %}Actualizar{% else %}Crear{% endif %} Post</h1>
+    <form method="post">
+      {% csrf_token %}
+      <label for="titulo">Título:</label>
+      <input
+        type="text"
+        name="titulo"
+        value="{{ post.titulo|default:'' }}"
+      /><br />
+      <label for="contenido">Contenido:</label>
+      <textarea name="contenido">{{ post.contenido|default:'' }}</textarea
+      ><br />
+      <button type="submit">
+        {% if post %}Actualizar{% else %}Crear{% endif %}
+      </button>
+    </form>
+{% endblock %}

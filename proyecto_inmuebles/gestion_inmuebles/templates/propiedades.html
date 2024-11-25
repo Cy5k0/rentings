@@ -1,0 +1,77 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<h2>Mis Inmuebles</h2>
+<a href="{% url 'agregar_propiedad' %}">Agregar Inmuebles</a>
+<ul>
+    {% for item in inmuebles_con_imagenes %}
+    <li>
+        <strong>{{ item.tipoinmueble.nombre }}</strong>
+        <br>
+        <strong>{{ item.inmueble.nombre }}</strong> - {{ item.inmueble.descripcion }} - {{ item.inmueble.precio }} {{ item.inmueble.moneda }}
+        <br>
+        Dirección: {{ item.inmueble.calle }} {{ item.inmueble.numero }}, {{ item.inmueble.ciudad.nombre }}
+        <br>
+        m2 construidos:  {{ item.inmueble.m2_construidos }} - m2 totales : {{ item.inmueble.m2_totales }}
+        <br>
+        estacionamientos : {{ item.inmueble.n_estacionamientos }}
+        <br>
+        habitaciones : {{ item.inmueble.n_habitaciones }} -  baños : {{ item.inmueble.n_baños }}
+        {{item.inmueble.pk}}
+        <br><a href="">Modificar Inmuebles</a>--<a href="{% url 'mostrar_un_inmuebles' item.inmueble.pk  %}">Agregar Fotografia</a>
+        <!-- Carrusel de imágenes en miniatura -->
+        {% if item.imagenes %}
+            <div class="row">
+                
+                {% for imagen in item.imagenes %}
+                    <!-- para manipular un contador de elementos y saber donde agregar fila-->
+                    {% if forloop.counter0|divisibleby:4 and not forloop.first %}
+                        </div><div class="row">
+                    {% endif %}
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                    <div class="card">
+                        <div class="card-body">
+                        <h5 class="card-title">Foto {{ i }}</h5>
+                        <img id="prop-min" src="{{ imagen.imagen.url }}" class="d-block w-auto"  alt="Imagen de {{ item.inmueble.nombre }}">
+                        <a href="#" class="btn btn-primary">Eliminar Foto</a>
+                        </div>
+                    </div>
+                    </div>
+                   
+                {% endfor %}    
+  
+            </div>
+
+<!--
+        <div id="carousel-{ { forloop.counter }}" class="carousel slide" data-bs-ride="carousel" >
+            <div class="carousel-inner">
+                { % for imagen in item.imagenes % }
+                <div class="carousel-item  {% if forloop.first %}active{% endif %}" data-bs-interval="3000">
+                    <!- -{ { imagen.imagen.url } }- ->
+                    <!- -<img id="prop_min" src="{ { imagen.imagen.url } }" class="d-block w-100" alt="Imagen de { { item.inmueble.nombre } }">- ->
+                    <img id="prop-min" src="{ { imagen.imagen.url }}" class="d-block w-auto"  alt="Imagen de {{ item.inmueble.nombre }}">
+                </div>
+                { % endfor % }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{ { forloop.counter } }" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-{ { forloop.counter } }" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>-->
+        {% else %}
+        <p>Imágenes no disponibles</p>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+
+
+{% endblock %}

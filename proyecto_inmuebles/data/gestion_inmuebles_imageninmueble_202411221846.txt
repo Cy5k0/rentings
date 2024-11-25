@@ -1,0 +1,9 @@
+|id |imagen                                     |propiedad_id|
+|---|-------------------------------------------|------------|
+|1  |propiedades/imagen_casa.jpeg               |1           |
+|2  |propiedades/imagen_departamento.png        |2           |
+|3  |propiedades/imagen_casa4_O8yrbLr.jpg       |2           |
+|4  |propiedades/imagen_departamento_yDxLkf5.png|2           |
+|5  |propiedades/imagen5.jpeg                   |3           |
+|6  |propiedades/imagen_casa_3.jpeg             |4           |
+|7  |propiedades/imagen_casa_3_SrSekwU.jpeg     |4           |
