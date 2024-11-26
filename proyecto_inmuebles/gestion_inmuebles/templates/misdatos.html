@@ -34,8 +34,19 @@
             <strong>ID Nacional:</strong> {{ perfil.id_nacional }}
           </li>
           <li class="list-group-item">
-            <strong>Tipo de Usuario:</strong> {{ perfil.tipousuario }}
+            <strong>Tipo de Usuario:</strong>
+            {% if perfil.tipo_usuario_id == 2 %}
+              Arrendador
+            {% elif perfil.tipo_usuario_id == 4 %}
+              Arrendatario
+            {% else %}
+              Desconocido
+            {% endif %}
           </li>
+          {% comment %} <li class="list-group-item">
+
+            <strong>Tipo de Usuario:</strong> {{ perfil.tipo_usuario}}
+          </li> {% endcomment %}
         </ul>
           <div class="card-body text-center">
             <a href="{% url 'update_profile' %}" class="btn btn-primary"
