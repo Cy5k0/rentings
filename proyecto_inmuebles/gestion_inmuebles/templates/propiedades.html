@@ -22,7 +22,7 @@
         <br>
         habitaciones : {{ item.inmueble.n_habitaciones }} -  baños : {{ item.inmueble.n_baños }}
         {{item.inmueble.pk}}
-        <br><a href="">Modificar Inmuebles</a>--<a href="{% url 'mostrar_un_inmuebles' item.inmueble.pk  %}">Agregar Fotografia</a>
+        <br><a href="{% url 'mostrar_un_inmuebles' item.inmueble.pk  %}">Modificar Inmuebles</a>--<a href="{% url 'mostrar_un_inmuebles' item.inmueble.pk  %}">Agregar Fotografia</a>
         <!-- Carrusel de imágenes en miniatura -->
         {% if item.imagenes %}
             <div class="row">

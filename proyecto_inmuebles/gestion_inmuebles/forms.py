@@ -15,7 +15,7 @@ from django import forms
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
-from .models import PerfilUsuario, TipoUsuario,ImagenInmueble
+from .models import PerfilUsuario, TipoUsuario,ImagenInmueble,Inmueble
 
 #######
 
@@ -176,3 +176,26 @@ class FotoInmuebleForm(forms.ModelForm):
         #widgets = {
             #'imagen': forms.ClearableFileInput(attrs={'multiple': False}),
         #}        
+        
+class InmuebleUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Inmueble
+        fields = ['nombre', 'descripcion', 'm2_construidos', 'm2_totales','n_estacionamientos','n_habitaciones'
+                  ,'n_baños','precio','moneda','calle','numero','ciudad','codigo_postal','tipo_inmueble']
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'descripcion': forms.TextInput(attrs={'class': 'form-control'}),
+            'm2_construidos': forms.TextInput(attrs={'class': 'form-control'}),
+            'm2_totales': forms.TextInput(attrs={'class': 'form-control'}),
+            'n_estacionamientos': forms.TextInput(attrs={'class': 'form-control'}),
+            'n_habitaciones': forms.TextInput(attrs={'class': 'form-control'}),
+            'n_baños': forms.TextInput(attrs={'class': 'form-control'}),
+            'precio': forms.TextInput(attrs={'class': 'form-control'}),
+            'moneda': forms.TextInput(attrs={'class': 'form-control'}),
+            'calle': forms.TextInput(attrs={'class': 'form-control'}),
+            'numero': forms.Select(attrs={'class': 'form-control'}),
+            'ciudad': forms.Select(attrs={'class': 'form-control'}),
+            'codigo_postal': forms.TextInput(attrs={'class': 'form-control'}),
+            'tipo_inmueble': forms.Select(attrs={'class': 'form-control'}),
+        }          
+    #propietario = models.ForeignKey(
