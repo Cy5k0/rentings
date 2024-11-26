@@ -17,7 +17,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import ContactForm
-from .forms import ContactFormForm,UserUpdateForm,PerfilUpdateForm,FotoInmuebleForm #,ContactFormModelForm#,CustomUserCreationForm,UserUpdateForm,PasswordForm
+from .forms import ContactFormForm,UserUpdateForm,PerfilUpdateForm,FotoInmuebleForm,InmuebleUpdateForm #,ContactFormModelForm#,CustomUserCreationForm,UserUpdateForm,PasswordForm
 #para registro usuarios
 #from django.contrib.auth import logout, authenticate, login
 
@@ -337,19 +337,25 @@ def mostrar_un_inmuebles(request, inmueble_id):
     inmuebles = get_object_or_404(Inmueble, pk=inmueble_id, propietario=request.user)
     
     if request.method == 'POST':
-        form = FotoInmuebleForm(request.POST, request.FILES)
-        files = request.FILES['imagen']
-        
-        if form.is_valid():
-            print('entro')
-            imagen = form.cleaned_data['imagen'] 
-            ImagenInmueble.objects.create(propiedad=inmuebles, imagen=imagen)
-            messages.success(request, 'La foto se ha agregado correctamente.')
-            return redirect('mostrar_un_inmuebles', inmueble_id=inmueble_id)  # Redirigir a mostrar detalles
-        else:
-            messages.error(request, 'Hubo un error al intentar guardar la imagen.')
+        if 'foto_submit' in request.POST:
+            form = FotoInmuebleForm(request.POST, request.FILES)
+            files = request.FILES['imagen']
             
-            
+            if form.is_valid():
+                
+                imagen = form.cleaned_data['imagen'] 
+                ImagenInmueble.objects.create(propiedad=inmuebles, imagen=imagen)
+                messages.success(request, 'La foto se ha agregado correctamente.')
+                return redirect('mostrar_un_inmuebles', inmueble_id=inmueble_id)  # Redirigir a mostrar detalles
+            else:
+                messages.error(request, 'Hubo un error al intentar guardar la imagen.')
+                
+        elif 'data_submit' in request.POST:
+            form = InmuebleUpdateForm(request.POST, request.FILES)
+            if form.is_valid():   
+                print('entro') 
+            else:
+                messages.error(request, 'Hay errores en los datos')    
     else:
         form = FotoInmuebleForm()
        
@@ -358,13 +364,15 @@ def mostrar_un_inmuebles(request, inmueble_id):
     imagenes = ImagenInmueble.objects.filter(propiedad=inmuebles)
     tipoinmueble = inmuebles.tipo_inmueble
     form = FotoInmuebleForm()
+    formInmueble = InmuebleUpdateForm()
         
     #tipoinmueble = TipoInmueble.objects.filter(TipoInmueble =inmuebles.tipo_inmueble)
     context={
         'inmueble': inmuebles,
         'imagenes': imagenes,
         'tipoinmueble': tipoinmueble,
-        'form': form
+        'form': form,
+        'formInmueble': formInmueble
     }
        
     
