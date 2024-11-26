@@ -21,4 +21,9 @@ urlpatterns = [
     path('dashboard_prop/', views.mostrar_inmuebles, name='dashboard_prop'),
     path('add_propiedad/', views.add_inmuebles, name='agregar_propiedad'),
     path('mostrar_un_inmuebles/<int:inmueble_id>/', views.mostrar_un_inmuebles, name='mostrar_un_inmuebles'),
+    
+    
+    #ajax para mostrar ciudades, estados
+    path('ajax/cargar-estados/', views.cargar_estados, name='ajax_cargar_estados'),
+    path('ajax/cargar-ciudades/', views.cargar_ciudades, name='ajax_cargar_ciudades'),
     ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

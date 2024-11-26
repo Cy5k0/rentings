@@ -3,6 +3,48 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Actualizar estados cuando se selecciona un país
+        $('#id_pais').change(function () {
+            var url = "{% url 'ajax_cargar_estados' %}";
+            var paisId = $(this).val();
+
+            $.ajax({
+                url: url,
+                data: {
+                    'pais_id': paisId
+                },
+                success: function (data) {
+                    $('#id_estado').html('<option value="">Selecciona un estado/provincia</option>');
+                    $.each(data, function (key, value) {
+                        $('#id_estado').append('<option value="' + value.id + '">' + value.nombre + '</option>');
+                    });
+                }
+            });
+        });
+
+        // Actualizar ciudades cuando se selecciona un estado
+        $('#id_estado').change(function () {
+            var url = "{% url 'ajax_cargar_ciudades' %}";
+            var estadoId = $(this).val();
+
+            $.ajax({
+                url: url,
+                data: {
+                    'estado_id': estadoId
+                },
+                success: function (data) {
+                    $('#id_ciudad').html('<option value="">Selecciona una ciudad</option>');
+                    $.each(data, function (key, value) {
+                        $('#id_ciudad').append('<option value="' + value.id + '">' + value.nombre + '</option>');
+                    });
+                }
+            });
+        });
+    });
+</script>
 
 
 <section id="propiedad">
@@ -23,23 +65,23 @@
         <br>
         habitaciones : {{ inmueble.n_habitaciones }} -  baños : {{ inmueble.n_baños }}
 
-        <section id="foto">
+        <section id="propiedad_edit">
 
             <div class="container">
               <div class="row justify-content-center">
                 <div class="col-md-6">
                   <div class="card shadow-lg">
                     <div class="card-header text-center bg-primary text-white">
-                      <h5 class="mb-0">Agregar Fotos</h5>
+                      <h5 class="mb-0">Modificar Data Inmueble</h5>
                     </div>
-                    <form method="POST" enctype="multipart/form-data">
+                    <form method="POST" >
                       {% csrf_token %}
                       {{ formInmueble.as_p }}
                         <!-- Formulario del Perfil - - >
                         { { perfil_form|crispy }} -->
                       </div>
                       <div class="d-grid gap-2">
-                        <button type="submit" name="foto_submit" class="btn btn-primary btn-lg">
+                        <button type="submit" name="data_submit" class="btn btn-primary btn-lg">
                           Guardar cambios
                         </button>
                       </div>
@@ -48,7 +90,8 @@
                 </div>
               </div>
             </div>
-    </section>        
+    </section> 
+    <secion id="Fotos_Actuales">       
         <br><a href="">Modificar Inmuebles</a>--<a href="">Agregar Fotografia</a>
         <!-- Carrusel de imágenes en miniatura -->
         {% if imagenes %}

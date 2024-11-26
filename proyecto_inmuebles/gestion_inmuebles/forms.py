@@ -15,7 +15,7 @@ from django import forms
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
-from .models import PerfilUsuario, TipoUsuario,ImagenInmueble,Inmueble
+from .models import PerfilUsuario, TipoUsuario,ImagenInmueble,Inmueble,Pais,EstadoProvincia,Ciudad
 
 #######
 
@@ -178,10 +178,27 @@ class FotoInmuebleForm(forms.ModelForm):
         #}        
         
 class InmuebleUpdateForm(forms.ModelForm):
+    pais = forms.ModelChoiceField(
+        queryset=Pais.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control', 'id': 'id_pais'}),
+        required=True
+    )
+    
+    estado_provincia = forms.ModelChoiceField(
+        queryset=EstadoProvincia.objects.none(),
+        widget=forms.Select(attrs={'class': 'form-control', 'id': 'id_estado'}),
+        required=True
+    )
+    
+    ciudad = forms.ModelChoiceField(
+        queryset=Ciudad.objects.none(),
+        widget=forms.Select(attrs={'class': 'form-control', 'id': 'id_ciudad'}),
+        required=True
+    )
     class Meta:
         model = Inmueble
         fields = ['nombre', 'descripcion', 'm2_construidos', 'm2_totales','n_estacionamientos','n_habitaciones'
-                  ,'n_baños','precio','moneda','calle','numero','ciudad','codigo_postal','tipo_inmueble']
+                  ,'n_baños','precio','moneda','calle','numero','pais', 'estado_provincia', 'ciudad','codigo_postal','tipo_inmueble']
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-control'}),
             'descripcion': forms.TextInput(attrs={'class': 'form-control'}),
@@ -193,8 +210,8 @@ class InmuebleUpdateForm(forms.ModelForm):
             'precio': forms.TextInput(attrs={'class': 'form-control'}),
             'moneda': forms.TextInput(attrs={'class': 'form-control'}),
             'calle': forms.TextInput(attrs={'class': 'form-control'}),
-            'numero': forms.Select(attrs={'class': 'form-control'}),
-            'ciudad': forms.Select(attrs={'class': 'form-control'}),
+            'numero': forms.TextInput(attrs={'class': 'form-control'}),
+            #'ciudad': forms.Select(attrs={'class': 'form-control'}),
             'codigo_postal': forms.TextInput(attrs={'class': 'form-control'}),
             'tipo_inmueble': forms.Select(attrs={'class': 'form-control'}),
         }          

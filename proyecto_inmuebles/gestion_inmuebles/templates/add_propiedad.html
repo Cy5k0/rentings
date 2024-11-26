@@ -1,21 +1,98 @@
 {% extends 'layout/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-    <h1>{% if post %}Actualizar{% else %}Crear{% endif %} Post</h1>
-    <form method="post">
-      {% csrf_token %}
-      <label for="titulo">Título:</label>
-      <input
-        type="text"
-        name="titulo"
-        value="{{ post.titulo|default:'' }}"
-      /><br />
-      <label for="contenido">Contenido:</label>
-      <textarea name="contenido">{{ post.contenido|default:'' }}</textarea
-      ><br />
-      <button type="submit">
-        {% if post %}Actualizar{% else %}Crear{% endif %}
-      </button>
-    </form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Actualizar estados cuando se selecciona un país
+        $('#id_pais').change(function () {
+            var url = "{% url 'ajax_cargar_estados' %}";
+            var paisId = $(this).val();
+
+            $.ajax({
+                url: url,
+                data: {
+                    'pais_id': paisId
+                },
+                success: function (data) {
+                    $('#id_estado').html('<option value="">Selecciona un estado/provincia</option>');
+                    $.each(data, function (key, value) {
+                        $('#id_estado').append('<option value="' + value.id + '">' + value.nombre + '</option>');
+                    });
+                }
+            });
+        });
+
+        // Actualizar ciudades cuando se selecciona un estado
+        $('#id_estado').change(function () {
+            var url = "{% url 'ajax_cargar_ciudades' %}";
+            var estadoId = $(this).val();
+
+            $.ajax({
+                url: url,
+                data: {
+                    'estado_id': estadoId
+                },
+                success: function (data) {
+                    $('#id_ciudad').html('<option value="">Selecciona una ciudad</option>');
+                    $.each(data, function (key, value) {
+                        $('#id_ciudad').append('<option value="' + value.id + '">' + value.nombre + '</option>');
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+
+<section id="propiedad">
+<h2>Propiedad</h2>
+
+            <div class="container">
+              {% if messages %}
+              <div class="alert alert-danger text-center" role="alert">
+                {% for message in messages %}
+                  {{ message }}
+                {% endfor %}
+              </div>
+              {% endif %}
+
+              {% if formInmueble.errors %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for field in formInmueble %}
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+              <div class="row justify-content-center">
+                <div class="col-md-6">
+                  <div class="card shadow-lg">
+                    <div class="card-header text-center bg-primary text-white">
+                      <h5 class="mb-0">Agregar Data Inmueble</h5>
+                    </div>
+                    <form method="POST" >
+                      {% csrf_token %}
+                      {{ formInmueble.as_p }}
+                        <!-- Formulario del Perfil - - >
+                        { { perfil_form|crispy }} -->
+                      </div>
+                      <div class="d-grid gap-2">
+                        <button type="submit" name="data_submit" class="btn btn-primary btn-lg">
+                          Guardar cambios
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+    </section> 
+
+
 {% endblock %}
