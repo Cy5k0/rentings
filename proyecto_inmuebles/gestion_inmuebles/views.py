@@ -35,8 +35,8 @@ from django.contrib.auth import login
 
 # buscador
 from django.http import JsonResponse
-from .models import Inmueble, Ciudad, ImagenInmueble, TipoInmueble
-
+from .models import Inmueble, Ciudad, ImagenInmueble, TipoInmueble,EstadoProvincia
+from django.http import JsonResponse
 #
 
 # misdatos
@@ -321,15 +321,45 @@ def mostrar_inmuebles(request):
 
 
 def add_inmuebles(request):
+    #inmueble, created = Inmueble.objects.get_or_create(propietario=request.user)
+    #inmueble = Inmueble.objects.filter(propietario=request.user).first()
     if request.method == "POST":
-        #        titulo = request.POST["titulo"]
-        #        contenido = request.POST["contenido"]
-        #        nuevo_post = Post(
-        #            titulo=titulo, contenido=contenido, fecha_publicacion=datetime.now()
-        #        )
-        #        nuevo_post.save()
-        return redirect("dashboard_prop")
-    return render(request, "add_propiedad.html")
+        #formInmueble = InmuebleUpdateForm(request.POST, instance=request.user)
+        #formInmueble = InmuebleUpdateForm(request.POST, instance=inmueble)
+        
+        formInmueble = InmuebleUpdateForm(request.POST)
+        if formInmueble.is_valid():   
+            inmueble = formInmueble.save(commit=False)
+            inmueble.propietario = request.user
+#            inmueble.ciudad=request.id_ciudad
+            inmueble.save()
+            print('graba')
+            messages.success(request, "Tu perfil ha sido actualizado.")
+            return redirect('dashboard_prop') 
+        else:
+            print(formInmueble.errors) 
+            messages.error(request, 'Hay errores en los datos') 
+    else:
+        #formInmueble = InmuebleUpdateForm(instance=request.user)   
+        formInmueble = InmuebleUpdateForm()            
+  #  return redirect("dashboard_prop")
+    context = {"formInmueble": formInmueble}
+    return render(request, "add_propiedad.html", context)
+
+
+
+
+def cargar_estados(request):
+    pais_id = request.GET.get('pais_id')
+    estados = EstadoProvincia.objects.filter(pais_id=pais_id).order_by('nombre')
+    return JsonResponse(list(estados.values('id', 'nombre')), safe=False)
+
+def cargar_ciudades(request):
+    estado_id = request.GET.get('estado_id')
+    ciudades = Ciudad.objects.filter(estado_provincia_id=estado_id).order_by('nombre')
+    return JsonResponse(list(ciudades.values('id', 'nombre')), safe=False)
+
+
 
 
 def mostrar_un_inmuebles(request, inmueble_id):
@@ -351,9 +381,12 @@ def mostrar_un_inmuebles(request, inmueble_id):
                 messages.error(request, 'Hubo un error al intentar guardar la imagen.')
                 
         elif 'data_submit' in request.POST:
-            form = InmuebleUpdateForm(request.POST, request.FILES)
+            form = InmuebleUpdateForm(request.POST, instance=inmuebles)
             if form.is_valid():   
                 print('entro') 
+                form.save()
+                messages.success(request, "Tu perfil ha sido actualizado.")
+                return redirect('mostrar_un_inmuebles', inmueble_id=inmueble_id) 
             else:
                 messages.error(request, 'Hay errores en los datos')    
     else:
@@ -364,7 +397,7 @@ def mostrar_un_inmuebles(request, inmueble_id):
     imagenes = ImagenInmueble.objects.filter(propiedad=inmuebles)
     tipoinmueble = inmuebles.tipo_inmueble
     form = FotoInmuebleForm()
-    formInmueble = InmuebleUpdateForm()
+    formInmueble = InmuebleUpdateForm(instance=inmuebles)
         
     #tipoinmueble = TipoInmueble.objects.filter(TipoInmueble =inmuebles.tipo_inmueble)
     context={
