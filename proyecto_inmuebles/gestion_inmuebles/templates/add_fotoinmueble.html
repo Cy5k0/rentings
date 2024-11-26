@@ -65,10 +65,11 @@
                 <div class="card-header text-center bg-primary text-white">
                   <h5 class="mb-0">Agregar Fotos</h5>
                 </div>
-                <form method="POST">
+                <form method="POST" enctype="multipart/form-data">
                   {% csrf_token %}
-                    <!-- Formulario del Perfil -->
-                    {{ perfil_form|crispy }}
+                  {{ form.as_p }}
+                    <!-- Formulario del Perfil - - >
+                    { { perfil_form|crispy }} -->
                   </div>
                   <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-primary btn-lg">

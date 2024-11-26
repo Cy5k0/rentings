@@ -15,7 +15,7 @@ from django import forms
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
-from .models import PerfilUsuario, TipoUsuario
+from .models import PerfilUsuario, TipoUsuario,ImagenInmueble
 
 #######
 
@@ -168,3 +168,11 @@ class PerfilUpdateForm(forms.ModelForm):
             'id_nacional': forms.TextInput(attrs={'class': 'form-control'}),
             'tipo_usuario': forms.Select(attrs={'class': 'form-control'}),
         }        
+        
+class FotoInmuebleForm(forms.ModelForm):
+    class Meta:
+        model = ImagenInmueble
+        fields = ['imagen']
+        #widgets = {
+            #'imagen': forms.ClearableFileInput(attrs={'multiple': False}),
+        #}        
