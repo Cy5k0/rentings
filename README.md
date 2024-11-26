@@ -1,6 +1,7 @@
 # Proyecto: Sitio Web para Arriendo de Inmuebles
 
-#### [Ir a Hito 1](#hito-1) - [Ir a Hito 1/2](#hito-2) - [Ir a Hito 2/2](#hito-2-segunda-parte) - [Ir a Hito 3](#hito-3)
+# Start of Selection
+#### [Ir a Hito 1](#hito-1) - [Ir a Hito 2.1](#hito-2) - [Ir a Hito 2.2](#hito-2-segunda-parte) - [Ir a Hito 3](#hito-3) - [Ir a Hito 4.1](#hito-41)
 
 ## Hito 1
 
@@ -204,6 +205,70 @@ Aplicación web para revisar inmuebles disponibles para arriendo, desarrollada p
 6. Poblar datos iniciales
 
 **[🖥️ Ver documento PDF](Hito3.pdf)**
+
+## Hito 4.1
+
+
+Este proyecto tiene como objetivo desarrollar un sitio web basado en el patrón de diseño MVC que permita a los usuarios revisar inmuebles disponibles para arriendo y gestionar sus datos personales. El enfoque principal es implementar operaciones CRUD sobre un modelo previamente definido, integrando una capa de acceso a datos y construyendo vistas tanto para los usuarios como para la administración.
+
+---
+
+## Descripción del Proyecto
+
+Una empresa dedicada al arriendo de inmuebles necesita un sitio web donde los usuarios puedan:
+
+1. Consultar inmuebles disponibles para arriendo.
+2. Registrarse, iniciar sesión y gestionar su información personal.
+3. Modificar sus datos personales según corresponda.
+
+---
+
+## Requerimientos
+
+### 1. Desarrollo de Vistas para Usuarios
+
+- **Template básico**: Crear una página personalizada para Arrendatarios y Arrendadores que sirva como panel de control personal.
+- **Vista de Login**: Crear una vista que permita a los usuarios iniciar sesión.
+- **Vista de Registro**: Crear un formulario de registro de usuarios.
+- **Redireccionamiento de URLs**: Implementar una funcionalidad que redirija a los usuarios según sus acciones (inicio de sesión, registro, etc.).
+- **Visualización de datos**: Mostrar los datos personales del usuario en su página personalizada.
+
+### 2. Modificación de Datos Personales
+
+- Agregar funcionalidad para que tanto Arrendatarios como Arrendadores puedan editar sus datos personales desde sus páginas personalizadas.
+
+---
+
+## Tecnologías Utilizadas
+
+- **Backend**: Implementación de operaciones CRUD mediante el patrón MVC.
+- **Frontend**: Desarrollo de vistas personalizadas utilizando HTML, CSS y/o frameworks de diseño.
+- **Base de Datos**: Uso de un modelo previamente diseñado y poblado con datos relevantes.
+- **Framework**: Django.
+
+---
+
+## Instrucciones de Instalación
+
+1. Clonar el repositorio:
+
+   ```bash
+   git clone https://github.com/Cy5k0/rentings.git
+   ```
+
+2. Instalar dependencias:
+
+```bash
+  pip install -r requirements.txt
+```
+
+3. Iniciar el servidor de desarrollo:
+
+```bash
+python manage.py runserver
+```
+
+**[🖥️ Ver documento PDF](Hito4p1.pdf)**
 
 ## 👥Integrantes:
 
