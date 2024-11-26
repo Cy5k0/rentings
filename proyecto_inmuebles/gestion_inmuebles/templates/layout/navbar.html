@@ -31,7 +31,7 @@
           modificar  propiedad, aceptar o rechazar solicitud
           peter18 arrendador  
           debe mostrar el buscador de propiedades y permitir solicitar arriendo-->
-        {% if request.session.tipo_usuario == "2" %}
+        {% if request.session.tipo_usuario == "1" %}
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -58,7 +58,7 @@
           modificar  propiedad, aceptar o rechazar solicitud
           peter18 arrendador  
           debe mostrar el buscador de propiedades y permitir solicitar arriendo-->
-          {% if request.session.tipo_usuario == "4" %}
+          {% if request.session.tipo_usuario == "2" %}
           <!---HABIA UN 1 aqui en vez de un 4-->
         </li>
 
