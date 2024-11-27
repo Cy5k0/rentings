@@ -2,14 +2,14 @@
 <header>
   {% if user.is_authenticated %}
   <div class="container">
-    <img id="logo" src="{% static 'img/deux.jpg' %}" alt="deux" />
+    <img id="logo" src="{% static 'img/deux.png' %}" alt="deux" />
     <h1 class="display-4" id="header-title">
       {{ user.first_name }}, Bienvenido a Deux Propiedades
     </h1>
   </div>
   {% else %}
   <div class="container">
-    <img id="logo" src="{% static 'img/deux.jpg' %}" alt="deux" />
+    <img id="logo" src="{% static 'img/deux.png' %}" alt="deux" />
     <h1 class="display-4" id="header-title">Bienvenido a Deux Propiedades</h1>
   </div>
   {% endif %}
