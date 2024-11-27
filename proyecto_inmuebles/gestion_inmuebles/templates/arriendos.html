@@ -50,6 +50,12 @@
             {{item.inmueble.ciudad.nombre }}
           </p>
         </div>
+        <div>
+          <form method="POST" action="{% url 'request_property' item.inmueble.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">Solicitar</button>
+        </form>
+        </div>  
         <div class="col-md-4">
           {% if item.imagenes %}
           <div

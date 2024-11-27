@@ -1,0 +1,76 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+
+<div class="container-fluid bg-light py-5">
+    <div class="container text-center">
+        <h3 class="mb-3">Mis solicitudes</h3>
+        <h5 class="text-muted">Comprueba aquí el estado de tus solicitudes</h5>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h5>Estado de Solicitudes de Propiedades</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Propiedad</th>
+                                <th scope="col">Ubicación</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Estado Solicitud</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for solicitud in solicitudes %}
+                            <tr>
+                                <td>{{ solicitud.inmueble.nombre }}</td>
+                                <td>
+                                    {{ solicitud.inmueble.ciudad.nombre | title }},
+                                    {{ solicitud.inmueble.ciudad.estado_provincia.nombre | title }}
+                                </td>
+                                <td>{{ solicitud.inmueble.precio }} {{ solicitud.inmueble.moneda }}</td>
+                                <td>
+                                    <span class="badge 
+                                        {% if solicitud.estado == 'en espera' %}
+                                            badge-warning
+                                        {% elif solicitud.estado == 'aprobada' %}
+                                            badge-success
+                                        {% elif solicitud.estado == 'rechazada' %}
+                                            badge-danger
+                                        {% else %}
+                                            badge-secondary
+                                        {% endif %}">
+                                        {{ solicitud.estado | title }}
+                                    </span>
+                                </td>
+                                <td>
+                                    {% if solicitud.estado == "en espera" %}
+                                    <form action="{% url 'delete_request' solicitud.id %}"  method="post" class="d-inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                    </form>
+                                    {% else %}
+                                    <button class="btn btn-secondary btn-sm" disabled>Eliminar</button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

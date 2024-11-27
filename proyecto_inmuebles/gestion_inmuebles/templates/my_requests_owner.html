@@ -1,0 +1,65 @@
+{% extends 'layout/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!-- Contenedor de bienvenida -->
+<div class="container-fluid custom-welcome-container">
+    <div class="container pt-3 pb-5 custom-welcome-container-text">
+        <h3>Mis solicitudes recibidas</h3>
+        <h5>Comprueba y gestiona tus solicitudes recibidas</h5>
+    </div>
+</div>
+
+<!-- Tabla de solicitudes -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Propiedad</th>
+                        <th scope="col">Ubicación</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Solicitante</th>
+                        <th scope="col">Estado solicitud</th>
+                        <th scope="col" colspan="2">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for solicitud in solicitudes %}
+                    <tr>
+                        <td>{{ solicitud.inmueble.nombre }}</td>
+                        <td>{{ solicitud.inmueble.direccion.comuna.nombre | title }}, 
+                            {{ solicitud.inmueble.direccion.comuna.region.nombre | title }}</td>
+                        <td>{{ solicitud.inmueble.precio }}</td>
+                        <td>{{ solicitud.usuario.first_name | title }} {{ solicitud.usuario.last_name | title }}</td>
+                        <td>{{ solicitud.estado | title }}</td>
+                        <td>
+                            {% if solicitud.estado == 'en espera' %}
+                            <form action="{% url 'accept_request' solicitud.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-success btn-sm">Aceptar</button>
+                            </form>
+                            {% else %}
+                            <button type="button" class="btn btn-secondary btn-sm" disabled>Aceptar</button>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if solicitud.estado == 'en espera' %}
+                            <form action="{% url 'reject_request' solicitud.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Rechazar</button>
+                            </form>
+                            {% else %}
+                            <button type="button" class="btn btn-secondary btn-sm" disabled>Rechazar</button>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -42,7 +42,7 @@ from django.contrib.auth import login
 
 # buscador
 from django.http import JsonResponse
-from .models import Inmueble, Ciudad, ImagenInmueble, TipoInmueble, EstadoProvincia
+from .models import Inmueble, Ciudad, ImagenInmueble, TipoInmueble, EstadoProvincia,Solicitud
 from django.http import JsonResponse
 
 #
@@ -416,3 +416,55 @@ def mostrar_un_inmuebles(request, inmueble_id):
     }
 
     return render(request, "add_fotoinmueble.html", context)
+
+
+#----solicitudes
+
+def request_property(request, id_propiedad):
+    usuario = request.user
+    propiedad = Inmueble.objects.get(id=id_propiedad)
+
+    
+    if request.method == 'POST':
+        nueva_solicitud = Solicitud.objects.create(
+            inmueble = propiedad,
+            usuario = usuario
+        )
+        
+
+        return redirect("/my_requests")
+    
+    else:
+        return redirect("/my_requests")
+    
+def my_requests(request):
+    usuario = request.user
+    solicitudes = Solicitud.objects.filter(usuario = usuario)
+
+    return render(request=request, template_name="my_requests.html", context={"solicitudes": solicitudes})
+
+
+def delete_request(request, solicitud_id):
+    if request.method == 'POST':
+        solicitud = Solicitud.objects.get(id=solicitud_id)
+        solicitud.delete()
+        return redirect('/my_requests')
+    else:
+        return redirect('/my_requests')
+    
+    
+#arrendador
+
+def my_requests_owner(request):
+    usuario = request.user
+    print('usuario')
+    print(usuario)
+    #solicitudes = Solicitud.objects.filter(inmueble__propietarioinmueble__propietario=usuario, inmueble__propietarioinmueble__propietario__tipo_usuario__nombre='Arrendador')
+    solicitudes = Solicitud.objects.filter(inmueble__propietario=usuario)
+    
+    
+    context = {
+        'propietario': usuario,
+        'solicitudes': solicitudes,
+    }
+    return render(request, 'my_requests_owner.html', context)    
