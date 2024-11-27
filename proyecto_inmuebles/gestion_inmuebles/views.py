@@ -43,7 +43,8 @@ from django.contrib.auth import login
 # buscador
 from django.http import JsonResponse
 from .models import Inmueble, Ciudad, ImagenInmueble, TipoInmueble, EstadoProvincia
-from django.http import JsonResponse
+
+# from django.http import JsonResponse
 
 #
 
@@ -334,14 +335,25 @@ def add_inmuebles(request):
     if request.method == "POST":
         # formInmueble = InmuebleUpdateForm(request.POST, instance=request.user)
         # formInmueble = InmuebleUpdateForm(request.POST, instance=inmueble)
+        print(request.POST)
+        print("request")
+
+        # <QueryDict: {'csrfmiddlewaretoken': ['jAozsiNu8dx7lnLzDfb3xRg9w2grR04JeFQ8zPvmG6vFEgABW0KbBI9QXtezhzkw'], 'nombre': ['propiedadX'], 'descripcion': ['x'], 'm2_construidos': ['56'], 'm2_totales': ['456'], 'n_estacionamientos': ['2'], 'n_habitaciones': ['2'], 'n_baños': ['1'], 'precio': ['23432432'], 'moneda': ['USD'], 'calle': ['gncbcbncv'], 'numero': ['54'], 'pais': ['5'], 'estado_provincia': ['1833'], 'ciudad': ['565420'], 'codigo_postal': ['5635653'], 'tipo_inmueble': ['1'], 'data_submit': ['']}>
+
+        # {'nombre': "['propiedadX']", 'descripcion': "['X']", 'calle': "['por ahi']", 'numero': "['77']", 'codigo_postal': "['5310144']"}
 
         formInmueble = InmuebleUpdateForm(request.POST)
+        # print(formInmueble)
         if formInmueble.is_valid():
+
             inmueble = formInmueble.save(commit=False)
             inmueble.propietario = request.user
-            #            inmueble.ciudad=request.id_ciudad
+            # Asegurando de que los campos estén correctamente asignados Probando fix
+            inmueble.ciudad = formInmueble.cleaned_data["ciudad"]
+            inmueble.estado_provincia = formInmueble.cleaned_data["estado_provincia"]
+            inmueble.pais = formInmueble.cleaned_data["pais"]
             inmueble.save()
-            print("graba")
+            # print("graba")
             messages.success(request, "Tu perfil ha sido actualizado.")
             return redirect("dashboard_prop")
         else:
