@@ -42,7 +42,14 @@ from django.contrib.auth import login
 
 # buscador
 from django.http import JsonResponse
-from .models import Inmueble, Ciudad, ImagenInmueble, TipoInmueble, EstadoProvincia,Solicitud
+from .models import (
+    Inmueble,
+    Ciudad,
+    ImagenInmueble,
+    TipoInmueble,
+    EstadoProvincia,
+    Solicitud,
+)
 from django.http import JsonResponse
 
 #
@@ -296,7 +303,8 @@ def update_profile(request):
             user_form.save()
             perfil_form.save()
             messages.success(request, "Tu perfil ha sido actualizado.")
-            return redirect("update_profile")
+            return redirect("misdatos")
+            # return redirect("update_profile")
     else:
         user_form = UserUpdateForm(instance=request.user)
         perfil_form = PerfilUpdateForm(instance=perfil)
@@ -429,95 +437,98 @@ def mostrar_un_inmuebles(request, inmueble_id):
     return render(request, "add_fotoinmueble.html", context)
 
 
-#----solicitudes
+# ----solicitudes
+
 
 def request_property(request, id_propiedad):
     usuario = request.user
     propiedad = Inmueble.objects.get(id=id_propiedad)
 
-    
-    if request.method == 'POST':
-        nueva_solicitud = Solicitud.objects.create(
-            inmueble = propiedad,
-            usuario = usuario
-        )
-        
+    if request.method == "POST":
+        nueva_solicitud = Solicitud.objects.create(inmueble=propiedad, usuario=usuario)
 
         return redirect("/my_requests")
-    
+
     else:
         return redirect("/my_requests")
-    
+
+
 def my_requests(request):
     usuario = request.user
-    solicitudes = Solicitud.objects.filter(usuario = usuario)
+    solicitudes = Solicitud.objects.filter(usuario=usuario)
 
-    return render(request=request, template_name="my_requests.html", context={"solicitudes": solicitudes})
+    return render(
+        request=request,
+        template_name="my_requests.html",
+        context={"solicitudes": solicitudes},
+    )
 
 
 def delete_request(request, solicitud_id):
-    if request.method == 'POST':
+    if request.method == "POST":
         solicitud = Solicitud.objects.get(id=solicitud_id)
         solicitud.delete()
-        return redirect('/my_requests')
+        return redirect("/my_requests")
     else:
-        return redirect('/my_requests')
-    
-    
-#arrendador
+        return redirect("/my_requests")
+
+
+# arrendador
+
 
 def my_requests_owner(request):
     # Obtener el usuario logueado
     usuario = request.user
-    
+
     # Filtrar las solicitudes donde el propietario del inmueble es el usuario logueado
     solicitudes = Solicitud.objects.filter(inmueble__propietario=usuario)
 
     # Pasar la información al contexto para renderizar la página
     context = {
-        'solicitudes': solicitudes,
+        "solicitudes": solicitudes,
     }
 
-    return render(request, 'my_requests_owner.html', context)
-
+    return render(request, "my_requests_owner.html", context)
 
 
 def accept_request(request, solicitud_id):
-    if request.method == 'POST':
+    if request.method == "POST":
         solicitud = Solicitud.objects.get(id=solicitud_id)
         solicitud.estado = "aceptada"
         solicitud.save()
-        
+
         inmueble = solicitud.inmueble
         inmueble.disponible = False
         inmueble.save()
-        
+
         # messages.success(request, 'Solicitud eliminada correctamente.')
-        return redirect('/my_requests_owner')
+        return redirect("/my_requests_owner")
     else:
-        return redirect('/my_requests_owner')
-    
+        return redirect("/my_requests_owner")
+
+
 def reject_request(request, solicitud_id):
-    if request.method == 'POST':
+    if request.method == "POST":
         solicitud = Solicitud.objects.get(id=solicitud_id)
         solicitud.estado = "rechazada"
         solicitud.save()
         # messages.success(request, 'Solicitud eliminada correctamente.')
-        return redirect('/my_requests_owner')
+        return redirect("/my_requests_owner")
     else:
-        return redirect('/my_requests_owner')
-    
-def habilitar_request(request, inmueble_id):    
-    if request.method == 'POST':
-        solicitud = Solicitud.objects.get(inmueble_id=inmueble_id,estado='aceptada')
+        return redirect("/my_requests_owner")
+
+
+def habilitar_request(request, inmueble_id):
+    if request.method == "POST":
+        solicitud = Solicitud.objects.get(inmueble_id=inmueble_id, estado="aceptada")
         solicitud.estado = "Finalizada"
         solicitud.save()
-        
+
         inmueble = solicitud.inmueble
         inmueble.disponible = True
         inmueble.save()
-        
+
         # messages.success(request, 'Solicitud eliminada correctamente.')
-        return redirect('/dashboard_prop')
+        return redirect("/dashboard_prop")
     else:
-        return redirect('/dashboard_prop')
+        return redirect("/dashboard_prop")
