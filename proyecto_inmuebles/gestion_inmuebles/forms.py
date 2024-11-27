@@ -15,7 +15,15 @@ from django import forms
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
-from .models import PerfilUsuario, TipoUsuario,ImagenInmueble,Inmueble,Pais,EstadoProvincia,Ciudad
+from .models import (
+    PerfilUsuario,
+    TipoUsuario,
+    ImagenInmueble,
+    Inmueble,
+    Pais,
+    EstadoProvincia,
+    Ciudad,
+)
 
 #######
 
@@ -131,88 +139,114 @@ class RegistroForm(UserCreationForm):
         return user
 
 
-
-
 class UserUpdateForm(forms.ModelForm):
-    #telefono = forms.CharField(max_length=15, required=False)
-    #direccion = forms.CharField(max_length=150, required=False)
-    #id_nacional = forms.CharField(max_length=20, required=True)
-    #tipo_usuario = forms.ModelChoiceField(
+    # telefono = forms.CharField(max_length=15, required=False)
+    # direccion = forms.CharField(max_length=150, required=False)
+    # id_nacional = forms.CharField(max_length=20, required=True)
+    # tipo_usuario = forms.ModelChoiceField(
     #    queryset=TipoUsuario.objects.all(),
     #    required=False,
     #    empty_label="Seleccione un tipo de usuario",
-    #)
+    # )
     class Meta:
         model = User
         # "password1", "password2", 'user_name',
-        fields = ['first_name', 'last_name', 'email' ]
-                 #"telefono","direccion","id_nacional", "tipo_usuario"]
+        fields = ["first_name", "last_name", "email"]
+        # "telefono","direccion","id_nacional", "tipo_usuario"]
         widgets = {
-
-            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
-           # 'telefono': forms.TextInput(attrs={'class': 'form-control'}),
+            "first_name": forms.TextInput(attrs={"class": "form-control"}),
+            "last_name": forms.TextInput(attrs={"class": "form-control"}),
+            "email": forms.EmailInput(attrs={"class": "form-control"}),
+            # 'telefono': forms.TextInput(attrs={'class': 'form-control'}),
             #'direccion': forms.TextInput(attrs={'class': 'form-control'}),
             #'id_nacional': forms.TextInput(attrs={'class': 'form-control'}),
             #'tipo_usuario': forms.TextInput(attrs={'class': 'form-control'}),
         }
-        
+
+
 class PerfilUpdateForm(forms.ModelForm):
     class Meta:
         model = PerfilUsuario
-        fields = ['telefono', 'direccion', 'id_nacional', 'tipo_usuario']
+        fields = ["telefono", "direccion", "id_nacional", "tipo_usuario"]
         widgets = {
-            'telefono': forms.TextInput(attrs={'class': 'form-control'}),
-            'direccion': forms.TextInput(attrs={'class': 'form-control'}),
-            'id_nacional': forms.TextInput(attrs={'class': 'form-control'}),
-            'tipo_usuario': forms.Select(attrs={'class': 'form-control'}),
-        }        
-        
+            "telefono": forms.TextInput(attrs={"class": "form-control"}),
+            "direccion": forms.TextInput(attrs={"class": "form-control"}),
+            "id_nacional": forms.TextInput(attrs={"class": "form-control"}),
+            "tipo_usuario": forms.Select(attrs={"class": "form-control"}),
+        }
+
+
 class FotoInmuebleForm(forms.ModelForm):
     class Meta:
         model = ImagenInmueble
-        fields = ['imagen']
-        #widgets = {
-            #'imagen': forms.ClearableFileInput(attrs={'multiple': False}),
-        #}        
-        
+        fields = ["imagen"]
+        # widgets = {
+        #'imagen': forms.ClearableFileInput(attrs={'multiple': False}),
+        # }
+
+
 class InmuebleUpdateForm(forms.ModelForm):
     pais = forms.ModelChoiceField(
         queryset=Pais.objects.all(),
-        widget=forms.Select(attrs={'class': 'form-control', 'id': 'id_pais'}),
-        required=True
+        widget=forms.Select(attrs={"class": "form-control", "id": "id_pais"}),
+        required=True,
     )
-    
-    estado_provincia = forms.ModelChoiceField(
-        queryset=EstadoProvincia.objects.none(),
-        widget=forms.Select(attrs={'class': 'form-control', 'id': 'id_estado'}),
-        required=True
+
+    # estado_provincia = forms.ModelChoiceField(
+    #    queryset=EstadoProvincia.objects.none(),
+    estado_provincia = forms.IntegerField(
+        widget=forms.Select(attrs={"class": "form-control", "id": "id_estado"}),
+        # required=True,
     )
-    
-    ciudad = forms.ModelChoiceField(
-        queryset=Ciudad.objects.none(),
-        widget=forms.Select(attrs={'class': 'form-control', 'id': 'id_ciudad'}),
-        required=True
+
+    # ciudad = forms.ModelChoiceField(
+    #    queryset=Ciudad.objects.none(),
+    ciudad = forms.IntegerField(
+        widget=forms.Select(attrs={"class": "form-control", "id": "id_ciudad"}),
+        # required=True,
     )
+
     class Meta:
         model = Inmueble
-        fields = ['nombre', 'descripcion', 'm2_construidos', 'm2_totales','n_estacionamientos','n_habitaciones'
-                  ,'n_baños','precio','moneda','calle','numero','pais', 'estado_provincia', 'ciudad','codigo_postal','tipo_inmueble']
+        fields = [
+            "nombre",
+            "descripcion",
+            "m2_construidos",
+            "m2_totales",
+            "n_estacionamientos",
+            "n_habitaciones",
+            "n_baños",
+            "precio",
+            "moneda",
+            "calle",
+            "numero",
+            "pais",
+            "estado_provincia",
+            "ciudad",
+            "codigo_postal",
+            "tipo_inmueble",
+        ]
         widgets = {
-            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
-            'descripcion': forms.TextInput(attrs={'class': 'form-control'}),
-            'm2_construidos': forms.TextInput(attrs={'class': 'form-control'}),
-            'm2_totales': forms.TextInput(attrs={'class': 'form-control'}),
-            'n_estacionamientos': forms.TextInput(attrs={'class': 'form-control'}),
-            'n_habitaciones': forms.TextInput(attrs={'class': 'form-control'}),
-            'n_baños': forms.TextInput(attrs={'class': 'form-control'}),
-            'precio': forms.TextInput(attrs={'class': 'form-control'}),
-            'moneda': forms.TextInput(attrs={'class': 'form-control'}),
-            'calle': forms.TextInput(attrs={'class': 'form-control'}),
-            'numero': forms.TextInput(attrs={'class': 'form-control'}),
+            "nombre": forms.TextInput(attrs={"class": "form-control"}),
+            "descripcion": forms.TextInput(attrs={"class": "form-control"}),
+            "m2_construidos": forms.TextInput(attrs={"class": "form-control"}),
+            "m2_totales": forms.TextInput(attrs={"class": "form-control"}),
+            "n_estacionamientos": forms.TextInput(attrs={"class": "form-control"}),
+            "n_habitaciones": forms.TextInput(attrs={"class": "form-control"}),
+            "n_baños": forms.TextInput(attrs={"class": "form-control"}),
+            "precio": forms.TextInput(attrs={"class": "form-control"}),
+            "moneda": forms.TextInput(attrs={"class": "form-control"}),
+            "calle": forms.TextInput(attrs={"class": "form-control"}),
+            "numero": forms.TextInput(attrs={"class": "form-control"}),
             #'ciudad': forms.Select(attrs={'class': 'form-control'}),
-            'codigo_postal': forms.TextInput(attrs={'class': 'form-control'}),
-            'tipo_inmueble': forms.Select(attrs={'class': 'form-control'}),
-        }          
-    #propietario = models.ForeignKey(
+            "codigo_postal": forms.TextInput(attrs={"class": "form-control"}),
+            "tipo_inmueble": forms.Select(attrs={"class": "form-control"}),
+        }
+
+    def clean(self, *args, **kwargs):
+        print(self.cleaned_data)
+        id_ciudad = self.cleaned_data.get("ciudad")
+        self.cleaned_data.update({"ciudad": Ciudad.objects.get(pk=id_ciudad)})
+        print(self.cleaned_data)
+
+    # propietario = models.ForeignKey(
