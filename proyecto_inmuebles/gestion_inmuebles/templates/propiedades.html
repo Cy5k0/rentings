@@ -11,6 +11,17 @@
     {% for item in inmuebles_con_imagenes %}
     <li>
         <strong>{{ item.tipoinmueble.nombre }}</strong>
+        {% if not item.inmueble.disponible  %}
+        <br>
+        <strong>Ocupada</strong>
+        <form action="{% url 'habilitar_request' item.inmueble.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success btn-sm">Habilitar Nuevamente</button>
+        </form>
+        {% else %}
+        <br>
+        <strong>Disponible</strong>
+        {% endif %}
         <br>
         <strong>{{ item.inmueble.nombre }}</strong> - {{ item.inmueble.descripcion }} - {{ item.inmueble.precio }} {{ item.inmueble.moneda }}
         <br>

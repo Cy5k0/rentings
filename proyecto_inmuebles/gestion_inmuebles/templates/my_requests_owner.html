@@ -29,7 +29,7 @@
                     {% for solicitud in solicitudes %}
                     <tr>
                         <td>{{ solicitud.inmueble.nombre }}</td>
-                        <td>{{ solicitud.inmueble.direccion.comuna.nombre | title }}, 
+                        <td>{{ solicitud.inmueble.direccion.comuna.nombre | title }},
                             {{ solicitud.inmueble.direccion.comuna.region.nombre | title }}</td>
                         <td>{{ solicitud.inmueble.precio }}</td>
                         <td>{{ solicitud.usuario.first_name | title }} {{ solicitud.usuario.last_name | title }}</td>

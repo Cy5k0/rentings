@@ -467,15 +467,57 @@ def delete_request(request, solicitud_id):
 #arrendador
 
 def my_requests_owner(request):
+    # Obtener el usuario logueado
     usuario = request.user
-    print('usuario')
-    print(usuario)
-    #solicitudes = Solicitud.objects.filter(inmueble__propietarioinmueble__propietario=usuario, inmueble__propietarioinmueble__propietario__tipo_usuario__nombre='Arrendador')
+    
+    # Filtrar las solicitudes donde el propietario del inmueble es el usuario logueado
     solicitudes = Solicitud.objects.filter(inmueble__propietario=usuario)
-    
-    
+
+    # Pasar la información al contexto para renderizar la página
     context = {
-        'propietario': usuario,
         'solicitudes': solicitudes,
     }
-    return render(request, 'my_requests_owner.html', context)    
+
+    return render(request, 'my_requests_owner.html', context)
+
+
+
+def accept_request(request, solicitud_id):
+    if request.method == 'POST':
+        solicitud = Solicitud.objects.get(id=solicitud_id)
+        solicitud.estado = "aceptada"
+        solicitud.save()
+        
+        inmueble = solicitud.inmueble
+        inmueble.disponible = False
+        inmueble.save()
+        
+        # messages.success(request, 'Solicitud eliminada correctamente.')
+        return redirect('/my_requests_owner')
+    else:
+        return redirect('/my_requests_owner')
+    
+def reject_request(request, solicitud_id):
+    if request.method == 'POST':
+        solicitud = Solicitud.objects.get(id=solicitud_id)
+        solicitud.estado = "rechazada"
+        solicitud.save()
+        # messages.success(request, 'Solicitud eliminada correctamente.')
+        return redirect('/my_requests_owner')
+    else:
+        return redirect('/my_requests_owner')
+    
+def habilitar_request(request, inmueble_id):    
+    if request.method == 'POST':
+        solicitud = Solicitud.objects.get(inmueble_id=inmueble_id,estado='aceptada')
+        solicitud.estado = "Finalizada"
+        solicitud.save()
+        
+        inmueble = solicitud.inmueble
+        inmueble.disponible = True
+        inmueble.save()
+        
+        # messages.success(request, 'Solicitud eliminada correctamente.')
+        return redirect('/dashboard_prop')
+    else:
+        return redirect('/dashboard_prop')

@@ -26,8 +26,10 @@ urlpatterns = [
     path('request_property/<int:id_propiedad>/', views.request_property, name='request_property'),
     path('my_requests/', views.my_requests, name='my_requests'),
     path('delete_request/<int:solicitud_id>/', views.delete_request, name='delete_request'),
-     path('my_requests_owner/', views.my_requests, name='my_requests'),
-
+     path('my_requests_owner/', views.my_requests_owner, name='my_requests_owner'),
+    path('accept_request/<int:solicitud_id>/', views.accept_request, name='accept_request'),
+    path('reject_request/<int:solicitud_id>/', views.reject_request, name='reject_request'),
+     path('habilitar_request/<int:inmueble_id>/', views.habilitar_request, name='habilitar_request'),
     
     #ajax para mostrar ciudades, estados
     path('ajax/cargar-estados/', views.cargar_estados, name='ajax_cargar_estados'),
