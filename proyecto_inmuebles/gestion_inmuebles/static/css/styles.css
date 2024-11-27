@@ -17,15 +17,6 @@
   height: 100%;
 }
 
-.welcome-section {
-  background-color: #fff3e6 !important;
-}
-
-h2 {
-  color: #ff6b6b;
-  font-family: "Comic Sans MS", cursive;
-}
-
 .text-LL {
   --bs-text-opacity: 1;
   color: (rgb(10, 10, 119), var(--bs-text-opacity));
@@ -67,10 +58,11 @@ h1 {
 }
 
 h2 {
-  color: #34495e;
+  color: #24343C;
   margin-top: 40px;
   border-bottom: 2px solid #3498db;
   padding-bottom: 10px;
+  font-family: "Segoe UI", cursive;
 }
 
 #search-form {
@@ -145,4 +137,60 @@ h2 {
     width: 100%;
     margin-bottom: 10px;
   }
+}
+
+
+
+.welcome-section {
+    background-color: #8CA4AC !important;
+    padding: 6rem 0;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+h3 {
+  color: #24343C
+}
+
+.card {
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    border-color: #2980b9;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2.5rem;
+    }
+}
+
+
+h3.mt-5.mb-4.text-secondary {
+  color: #24343C;
+}
+
+.welcome-section .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.welcome-section .card:hover {
+    background-color: #EAEB2D;
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
 }
