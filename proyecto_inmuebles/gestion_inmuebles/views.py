@@ -71,10 +71,15 @@ def indice(request):
         request.session["tipo_usuario"] = perfil.tipo_usuario.tipo
         tipo_usuario = request.session.get("tipo_usuario")
         print(tipo_usuario)
+        context = {
+            "inmuebles_con_imagenes": inmuebles_con_imagenes,
+            'usuario': request.session.get('usuario'), 'tipo_usuario':tipo_usuario ,
+        # "ciudades": Ciudad.objects.all(),  # Para mostrar las ciudades en el menú desplegable
+        }
         return render(
             request,
-            "index.html",
-            {"usuario": request.session.get("usuario"), "tipo_usuario": tipo_usuario},
+            "index.html",context
+            #{"usuario": request.session.get("usuario"), "tipo_usuario": tipo_usuario},
         )
 
         # return render(request, 'index.html', {'usuario': request.session.get('usuario'), 'tipo_usuario':tipo_usuario })
