@@ -16,10 +16,7 @@ from .forms import (
     PerfilUpdateForm,
     FotoInmuebleForm,
     InmuebleUpdateForm,
-)  # ,ContactFormModelForm#,CustomUserCreationForm,UserUpdateForm,PasswordForm
-
-# para registro usuarios
-# from django.contrib.auth import logout, authenticate, login
+)
 
 from django.contrib import messages
 from .forms import RegistroForm
@@ -437,30 +434,3 @@ def habilitar_request(request, inmueble_id):
 
 
 # -------------------------------------------------------------
-# def mostrar_inmuebles_disponibles(request):
-# Obtener inmuebles disponibles de manera aleatoria
-# inmuebles = Inmueble.objects.filter(disponible=True).order_by("?")[
-#     :4
-# ]  # Selecciona 4 inmuebles aleatorios
-
-# # fotos del inmueble
-# inmuebles_con_imagenes = []
-# for inmueble in inmuebles:
-#     imagen = ImagenInmueble.objects.filter(
-#         propiedad=inmueble
-#     ).first()  # Obtener solo la primera imagen
-#     inmuebles_con_imagenes.append(
-#         {
-#             "inmueble": inmueble,
-#             "imagen": imagen,
-#             "ciudad": inmueble.ciudad.nombre,
-#             "descripcion": inmueble.descripcion,
-#         }
-#     )
-
-# context = {
-#     "inmuebles_con_imagenes": inmuebles_con_imagenes,
-#     "ciudades": Ciudad.objects.all(),  # Para mostrar las ciudades en el menú desplegable
-# }
-
-# return render(request, "index.html", context)

@@ -52,8 +52,6 @@ urlpatterns = [
         views.habilitar_request,
         name="habilitar_request",
     ),
-    # para mostrar inmuebles disponibles en index
-    # path("", views.mostrar_inmuebles_disponibles, name="indice"),
     # ajax para mostrar ciudades, estados
     path("ajax/cargar-estados/", views.cargar_estados, name="ajax_cargar_estados"),
     path("ajax/cargar-ciudades/", views.cargar_ciudades, name="ajax_cargar_ciudades"),
