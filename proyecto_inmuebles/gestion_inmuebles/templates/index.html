@@ -1,14 +1,7 @@
 {% extends 'layout/base.html' %} {% block content %}
-<!DOCTYPE html>
+
 {% load static %}
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Indice</title>
-  </head>
-  <body>
-    
+
 
     <!-- Carrusel -->
     <div id="flanCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
@@ -201,7 +194,7 @@
         <div class="col">
             <div class="card h-100 shadow-sm">
                 {% if item.imagen %}
-                    <img src="{{ item.imagen.url }}" class="card-img-top" alt="Imagen de {{ item.inmueble.nombre }}" style="height: 250px; object-fit: cover;">
+                    <img src="{{ item.imagen.imagen.url }}" class="card-img-top" alt="Imagen de {{ item.inmueble.nombre }}" style="height: 250px; object-fit: cover;">
                 {% else %}
                     <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 250px;">
                         <p class="text-muted">Sin imagen disponible</p>
@@ -232,5 +225,3 @@
 </div>
 
     {% endblock %}
-  </body>
-</html>
