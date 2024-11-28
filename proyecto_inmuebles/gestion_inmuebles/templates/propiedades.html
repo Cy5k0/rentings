@@ -1,10 +1,10 @@
-{% extends 'layout/base.html' %}
+ {% extends 'layout/base.html' %}
 
 
 {% block content %}
 {% load static %}
 
-
+{% comment %}
 <h2>Mis Inmuebles</h2>
 <a href="{% url 'agregar_propiedad' %}">Agregar Inmuebles</a>
 <ul>
@@ -32,17 +32,18 @@
         estacionamientos : {{ item.inmueble.n_estacionamientos }}
         <br>
         habitaciones : {{ item.inmueble.n_habitaciones }} -  baños : {{ item.inmueble.n_baños }}
-        {% comment %} {{item.inmueble.pk}} {% endcomment %}
-        <br><a href="{% url 'mostrar_un_inmuebles' item.inmueble.pk  %}">Modificar Inmuebles</a>--<a href="{% url 'mostrar_un_inmuebles' item.inmueble.pk  %}">Agregar Fotografia</a>
+        {{item.inmueble.pk}} 
+        <br><a href="{% url 'mostrar_un_inmuebles' item.inmueble.pk  %}">Modificar Inmuebles</a>--<a href="{% url 'mostrar_un_inmuebles' item.inmueble.pk  %}">Agregar Fotografia</a> {% endcomment %}
         <!-- Carrusel de imágenes en miniatura -->
 
-        {% if item.imagenes %}
+        {% comment %} {% if item.imagenes %}
             <div class="row">
                 
                 {% for imagen in item.imagenes %}
                     <!-- para manipular un contador de elementos y saber donde agregar fila-->
                     {% if forloop.counter0|divisibleby:4 and not forloop.first %}
-                        </div><div class="row">
+            </div>
+            <div class="row">
                     {% endif %}
                     <div class="col-sm-6 mb-3 mb-sm-0">
                     <div class="card">
@@ -66,4 +67,91 @@
 </ul>
 
 
+{% endblock %} {% endcomment %}
+{% comment %} {% extends 'layout/base.html' %}
+
+{% block content %}
+{% load static %} {% endcomment %}
+
+<div id="propiedades-container" class="container my-4">
+    <div class="row">
+        <div class="col-12">
+            <h2 id="titulo-mis-inmuebles" class="mb-3">Mis Inmuebles</h2>
+            <a href="{% url 'agregar_propiedad' %}" id="btn-agregar-inmueble" class="btn btn-primary mb-3">Agregar Inmuebles</a>
+        </div>
+    </div>
+
+    <div id="lista-inmuebles" class="row">
+        {% for item in inmuebles_con_imagenes %}
+        <div id="inmueble-{{ item.inmueble.pk }}" class="col-md-4 mb-4 propiedad-card">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 id="tipo-inmueble-{{ item.inmueble.pk }}" class="card-title">{{ item.tipoinmueble.nombre }}</h5>
+                    
+                    <div id="estado-inmueble-{{ item.inmueble.pk }}" class="mb-2">
+                        {% if not item.inmueble.disponible %}
+                            <span id="badge-ocupada-{{ item.inmueble.pk }}" class="badge bg-warning text-dark">Ocupada</span>
+                            <form id="form-habilitar-{{ item.inmueble.pk }}" 
+                                  action="{% url 'habilitar_request' item.inmueble.pk %}" 
+                                  method="post" 
+                                  class="mt-2">
+                                {% csrf_token %}
+                                <button id="btn-habilitar-{{ item.inmueble.pk }}" type="submit" class="btn btn-success btn-sm">Habilitar Nuevamente</button>
+                            </form>
+                        {% else %}
+                            <span id="badge-disponible-{{ item.inmueble.pk }}" class="badge bg-success">Disponible</span>
+                        {% endif %}
+                    </div>
+
+                    <p id="detalles-inmueble-{{ item.inmueble.pk }}" class="card-text">
+                        <strong>{{ item.inmueble.nombre }}</strong>
+                        <br>{{ item.inmueble.descripcion }}
+                        <br>Precio: {{ item.inmueble.precio }} {{ item.inmueble.moneda }}
+                        <br>Dirección: {{ item.inmueble.calle }} {{ item.inmueble.numero }}, {{ item.inmueble.ciudad.nombre }}
+                        <br>m² construidos: {{ item.inmueble.m2_construidos }}
+                        <br>m² totales: {{ item.inmueble.m2_totales }}
+                        <br>Estacionamientos: {{ item.inmueble.n_estacionamientos }}
+                        <br>Habitaciones: {{ item.inmueble.n_habitaciones }} | Baños: {{ item.inmueble.n_baños }}
+                    </p>
+
+                    <div id="acciones-inmueble-{{ item.inmueble.pk }}" class="d-flex justify-content-between">
+                        <a id="btn-modificar-{{ item.inmueble.pk }}" 
+                           href="{% url 'mostrar_un_inmuebles' item.inmueble.pk %}" 
+                           class="btn btn-outline-primary btn-sm">Modificar</a>
+                        <a id="btn-agregar-foto-{{ item.inmueble.pk }}" 
+                           href="{% url 'mostrar_un_inmuebles' item.inmueble.pk %}" 
+                           class="btn btn-outline-secondary btn-sm">Agregar Foto</a>
+                    </div>
+                </div>
+
+                {% if item.imagenes %}
+                <div id="galeria-imagenes-{{ item.inmueble.pk }}" class="card-footer">
+                    <div class="row">
+                        {% for imagen in item.imagenes %}
+                        <div id="imagen-{{ imagen.pk }}" class="col-3 mb-2 contenedor-imagen">
+                            <div class="image-thumbnail">
+                                <img id="img-{{ imagen.pk }}" 
+                                     src="{{ imagen.imagen.url }}" 
+                                     class="img-fluid rounded" 
+                                     alt="Imagen de {{ item.inmueble.nombre }}">
+                                <div class="overlay">
+                                    <a id="btn-eliminar-imagen-{{ imagen.pk }}" 
+                                       href="#" 
+                                       class="btn btn-danger btn-sm">Eliminar</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div id="mensaje-sin-inmuebles" class="alert alert-info">No hay inmuebles disponibles.</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

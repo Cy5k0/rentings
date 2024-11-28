@@ -199,3 +199,57 @@ h3.mt-5.mb-4.text-secondary {
 /*---------------- Dashboard Prop---------------*/
 /* Botones personalizados */
 
+/* Custom styles for inmuebles cards */
+#lista-inmuebles .contenedor-imagen {
+    position: relative;
+}
+
+#lista-inmuebles .image-thumbnail {
+    position: relative;
+    overflow: hidden;
+}
+
+#lista-inmuebles .image-thumbnail img {
+    transition: transform 0.3s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#lista-inmuebles .image-thumbnail:hover img {
+    transform: scale(1.1);
+}
+
+#lista-inmuebles .image-thumbnail .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#lista-inmuebles .image-thumbnail:hover .overlay {
+    opacity: 1;
+}
+
+#lista-inmuebles .propiedad-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#lista-inmuebles .propiedad-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #lista-inmuebles .contenedor-imagen {
+        max-height: 150px;
+    }
+}
