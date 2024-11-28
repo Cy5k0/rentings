@@ -1,8 +1,8 @@
 {% extends 'layout/base.html' %}
-{% load static %}
+
 
 {% block content %}
-
+{% load static %}
 
 
 <h2>Mis Inmuebles</h2>
@@ -32,7 +32,7 @@
         estacionamientos : {{ item.inmueble.n_estacionamientos }}
         <br>
         habitaciones : {{ item.inmueble.n_habitaciones }} -  baños : {{ item.inmueble.n_baños }}
-        {{item.inmueble.pk}}
+        {% comment %} {{item.inmueble.pk}} {% endcomment %}
         <br><a href="{% url 'mostrar_un_inmuebles' item.inmueble.pk  %}">Modificar Inmuebles</a>--<a href="{% url 'mostrar_un_inmuebles' item.inmueble.pk  %}">Agregar Fotografia</a>
         <!-- Carrusel de imágenes en miniatura -->
 
@@ -58,26 +58,6 @@
   
             </div>
 
-<!--
-        <div id="carousel-{ { forloop.counter }}" class="carousel slide" data-bs-ride="carousel" >
-            <div class="carousel-inner">
-                { % for imagen in item.imagenes % }
-                <div class="carousel-item  {% if forloop.first %}active{% endif %}" data-bs-interval="3000">
-                    <!- -{ { imagen.imagen.url } }- ->
-                    <!- -<img id="prop_min" src="{ { imagen.imagen.url } }" class="d-block w-100" alt="Imagen de { { item.inmueble.nombre } }">- ->
-                    <img id="prop-min" src="{ { imagen.imagen.url }}" class="d-block w-auto"  alt="Imagen de {{ item.inmueble.nombre }}">
-                </div>
-                { % endfor % }
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{ { forloop.counter } }" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-{ { forloop.counter } }" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>-->
         {% else %}
         <p>Imágenes no disponibles</p>
         {% endif %}
