@@ -1,7 +1,7 @@
 # Proyecto: Sitio Web para Arriendo de Inmuebles
 
-# Start of Selection
-#### [Ir a Hito 1](#hito-1) - [Ir a Hito 2.1](#hito-2) - [Ir a Hito 2.2](#hito-2-segunda-parte) - [Ir a Hito 3](#hito-3) - [Ir a Hito 4.1](#hito-41)
+
+#### [Ir a Hito 1](#hito-1) - [Ir a Hito 2.1](#hito-2) - [Ir a Hito 2.2](#hito-2-segunda-parte) - [Ir a Hito 3](#hito-3) - [Ir a Hito 4.1](#hito-41) - [Ir a Hito 4.2](#hito-42)
 
 ## Hito 1
 
@@ -270,7 +270,60 @@ python manage.py runserver
 
 **[🖥️ Ver documento PDF](Hito4p1.pdf)**
 
+## Hito 4.2
 
+## 📋 Descripción del Proyecto
+
+Aplicación web para gestión de arriendos de inmuebles que permite a arrendadores publicar propiedades y a arrendatarios explorar opciones disponibles.
+
+## 🎯 Objetivos
+
+Desarrollar una plataforma que facilite:
+- Publicación de propiedades en arriendo
+- Actualización de información de inmuebles
+- Exploración de ofertas para potenciales arrendatarios
+
+## 🚀 Requerimientos Funcionales
+
+### 1. Gestión de Inmuebles para Arrendadores
+
+#### Agregar Nuevos Inmuebles
+- Crear rutas para vista de nuevas viviendas
+- Desarrollar formulario de ingreso de propiedades
+- Implementar función de guardado de inmuebles
+
+### 2. Administración de Inmuebles Existentes
+
+#### Actualización y Eliminación de Propiedades
+- Generar rutas para actualización de viviendas
+- Crear formulario de edición basado en modelo definido
+- Desarrollar funcionalidad de actualización de objetos
+
+### 3. Visualización de Oferta para Arrendatarios
+
+#### Exploración de Viviendas Disponibles
+- Crear rutas para visualización de inmuebles
+- Desarrollar vista y controlador para listado de propiedades
+
+## 🌐 Funcionalidades Adicionales
+
+- Carga de información geográfica de Chile (Comunas y Regiones)
+- Generación de reportes sobre la aplicación
+
+## 💻 Tecnologías Utilizadas
+
+- Django 5.1
+- Python 3.12 , Html, CSS
+
+## 🔧 Configuración del Proyecto
+
+### Instalación
+
+1. Clonar repositorio
+   ```bash
+   git clone https://github.com/Cy5k0/rentings.git
+
+**[🖥️ Ver documento PDF](Hito4p2.pdf)**
 
 ## 👥Integrantes:
 
