@@ -60,6 +60,29 @@ from .models import PerfilUsuario
 
 # Create your views here.
 def indice(request):
+    inmuebles = Inmueble.objects.filter(disponible=True).order_by("?")[
+        :4
+    ]  # Selecciona 4 inmuebles aleatorios
+
+    # fotos del inmueble
+    inmuebles_con_imagenes = []
+    for inmueble in inmuebles:
+        imagen = ImagenInmueble.objects.filter(
+            propiedad=inmueble
+        ).first()  # Obtener solo la primera imagen
+        inmuebles_con_imagenes.append(
+            {
+                "inmueble": inmueble,
+                "imagen": imagen,
+                "ciudad": inmueble.ciudad.nombre,
+                "descripcion": inmueble.descripcion,
+            }
+        )
+
+    context = {
+        "inmuebles_con_imagenes": inmuebles_con_imagenes,
+        # "ciudades": Ciudad.objects.all(),  # Para mostrar las ciudades en el menú desplegable
+    }
     if request.user.is_authenticated:
         perfil = PerfilUsuario.objects.get(user=request.user)
 
@@ -76,7 +99,7 @@ def indice(request):
 
         # return render(request, 'index.html', {'usuario': request.session.get('usuario'), 'tipo_usuario':tipo_usuario })
 
-    return render(request, "index.html", {})
+    return render(request, "index.html", context)
 
 
 def contacto(request):
@@ -532,3 +555,33 @@ def habilitar_request(request, inmueble_id):
         return redirect("/dashboard_prop")
     else:
         return redirect("/dashboard_prop")
+
+
+# -------------------------------------------------------------
+# def mostrar_inmuebles_disponibles(request):
+# Obtener inmuebles disponibles de manera aleatoria
+# inmuebles = Inmueble.objects.filter(disponible=True).order_by("?")[
+#     :4
+# ]  # Selecciona 4 inmuebles aleatorios
+
+# # fotos del inmueble
+# inmuebles_con_imagenes = []
+# for inmueble in inmuebles:
+#     imagen = ImagenInmueble.objects.filter(
+#         propiedad=inmueble
+#     ).first()  # Obtener solo la primera imagen
+#     inmuebles_con_imagenes.append(
+#         {
+#             "inmueble": inmueble,
+#             "imagen": imagen,
+#             "ciudad": inmueble.ciudad.nombre,
+#             "descripcion": inmueble.descripcion,
+#         }
+#     )
+
+# context = {
+#     "inmuebles_con_imagenes": inmuebles_con_imagenes,
+#     "ciudades": Ciudad.objects.all(),  # Para mostrar las ciudades en el menú desplegable
+# }
+
+# return render(request, "index.html", context)

@@ -177,6 +177,25 @@
         </div>
     </div>
 
+
+<h1>Últimos Inmuebles Registrados</h1>
+<div class="inmuebles">
+    {% for item in inmuebles_con_imagenes %}
+    <div class="inmueble">
+        <h2>{{ item.inmueble.nombre }}</h2>
+        {% if item.imagen %}
+        <img src="{{ item.imagen.url }}" alt="Imagen de {{ item.inmueble.nombre }}">
+        {% else %}
+        <p>Sin imagen disponible</p>
+        {% endif %}
+        <p>Ciudad: {{ item.ciudad }}</p>
+        <p>Descripción: {{ item.descripcion }}</p>
+      </div>
+    {% endfor %}
+</div>
+
+
+
     <!-- Mensaje para usuarios no premium -->
     <div class="container mt-5 mb-4">
       <div class="row justify-content-center">
@@ -195,27 +214,8 @@
       </div>
     </div>
 
-    <!-- Cards de Flanes -->
-    <div class="container">
-      <div class="row">
-        <!--{ % for flan in flans %}-->
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title"><!--{{ flan.name }}--></h5>
-              <p class="card-text"><!--{{ flan.description }}  --></p>
-              <img
-                src="{{ flan.image_url }}"
-                class="card-img-top"
-                alt="{{ flan.name }}"
-              />
-              <!-- <a href="{ % url 'detalle_flan' flan.flan_uuid % }" class="btn btn-primary">Ver Detalles</a> -->
-            </div>
-          </div>
-        </div>
-        <!--{ % endfor %}-->
-      </div>
-    </div>
+
+
 
 
 
