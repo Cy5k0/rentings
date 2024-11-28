@@ -4,14 +4,7 @@ from django.shortcuts import (
     get_object_or_404,
 )  # get_object_or_404 para filtrar un elemento
 
-# login
-# from django.contrib.auth import authenticate, login
-# from django.contrib import messages
 from .models import PerfilUsuario
-
-#
-
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
@@ -29,13 +22,7 @@ from .forms import (
 # from django.contrib.auth import logout, authenticate, login
 
 from django.contrib import messages
-
-# registro
 from .forms import RegistroForm
-
-# from django.db.models.signals import post_save
-# from django.dispatch import receiver
-# from django.contrib.auth.models import User
 from django.contrib.auth import login
 
 # from .forms import RegistroUser
@@ -51,10 +38,6 @@ from .models import (
     Solicitud,
 )
 from django.http import JsonResponse
-
-#
-
-# misdatos
 from .models import PerfilUsuario
 
 
@@ -117,85 +100,8 @@ def contacto(request):
     return render(request, "contactoM.html", {"form": form})
 
 
-# def contactoM(request):
-#    if request.method == 'GET':
-#        form=ContactFormForm()
-#    else:
-#        #para el formulario normal
-#        #form = ContactFormForm(request.POST)
-#        #para el formulario modal
-#        form = ContactFormModelForm(request.POST)
-#        if form.is_valid():
-#          contact_form = ContactForm.objects.create(**form.cleaned_data)
-#          return HttpResponseRedirect('exito')
-#    return render(request, 'contactoM.html', {'form': form})
-
-
 def exito(request):
     return render(request, "exito.html")
-
-
-# version1
-# def log_in(request):
-#    return render(request, "login.html", {})
-# def log_in(request):
-#    print('hola')
-#    if request.method == "POST":
-#        # Captura de los datos del formulario
-#        username = request.POST['username']
-#        password = request.POST['password']
-
-#        # Autenticación del usuario
-#        user = authenticate(request, username=username, password=password)
-#
-#        if user is not None:
-#            # Si la autenticación es exitosa, iniciar sesión
-#            login(request, user)
-#
-#            # Obtener información del perfil del usuario
-#            perfil = PerfilUsuario.objects.get(user=user)
-#
-#            # Guardar nombre y tipo de usuario en la sesión
-#            request.session['usuario'] = user.username
-#            request.session['tipo_usuario'] = perfil.tipo_usuario
-#            print('hola')
-#            print("Entrando a la condición de sesión")
-#
-#            if 'usuario' in request.session:
-#                print(f"Usuario en sesión: {request.session['usuario']}")
-#            else:
-#                print("No hay usuario en la sesión")
-#            # Redirigir a la página principal o a otra página
-#            return redirect('indice')  # la ruta de destino
-#        else:
-#            # Si la autenticación falla, muestra un mensaje de error
-#            messages.error(request, "Su nombre de usuario y contraseña no coinciden. Inténtelo de nuevo.")
-#
-#    # Si la petición es GET o hay un error, muestra la página de login
-#    return render(request, "login.html", {})
-
-
-# def register(request):
-#    if request.method == 'POST':
-#        form = RegistroUser(request.POST)
-#        if form.is_valid():
-#            user = form.save()
-#            login(request, user)
-#            return redirect('indice')  # Redirige a la página principal
-#    else:
-#        form = RegistroUser()
-
-#    return render(request, 'registro.html', {'form': form})
-
-
-# @receiver(post_save, sender=User)
-# def crear_perfil_usuario(sender, instance, created, **kwargs):
-#    if created:
-#        PerfilUsuario.objects.create(user=instance)
-
-# @receiver(post_save, sender=User)
-# def guardar_perfil_usuario(sender, instance, **kwargs):
-#    instance.perfil.save()
 
 
 def register(request):
@@ -212,28 +118,6 @@ def register(request):
     )
 
 
-# version1
-# def buscar_ciudades(request):
-#    # Verificar si la solicitud es AJAX y si existe el parámetro 'q'
-#    if request.headers.get('x-requested-with') == 'XMLHttpRequest' and 'q' in request.GET:
-#        query = request.GET.get('q')
-#        #firstname__startswith
-#        #ciudades = Ciudad.objects.filter(nombre__icontains=query).select_related('estado_provincia__pais')[:20]
-#        ciudades = Ciudad.objects.filter(nombre__startswith=query).select_related('estado_provincia__pais').order_by('nombre')[:20]
-#        #resultados = [{'nombre': c.nombre, 'estado': c.estado, 'pais': c.pais} for c in ciudades]
-
-
-#        resultados = [
-#            {
-#                'id': ciudad.id,
-#                'nombre': ciudad.nombre,
-#                'estado': ciudad.estado_provincia.nombre,
-#                'pais': ciudad.estado_provincia.pais.nombre
-#            }
-#            for ciudad in ciudades
-#        ]
-#        return JsonResponse({'resultados': resultados})
-#    return JsonResponse({'resultados': []})
 def buscar_ciudades(request):
     query = request.GET.get("q", "")
 
@@ -302,8 +186,6 @@ def misdatos(request):
         ("2", "Arrendatario"),
         # ("3", "Administrador"),
     )
-    # tipousuario = TIPOS_USUARIO.get (perfil.tipo_usuario.nombre, "Descripción no disponible")
-
     # se envia por parametro los 2 modelos
     context = {
         "user": request.user,  # Datos del user de django
@@ -360,11 +242,7 @@ def mostrar_inmuebles(request):
 
 
 def add_inmuebles(request):
-    # inmueble, created = Inmueble.objects.get_or_create(propietario=request.user)
-    # inmueble = Inmueble.objects.filter(propietario=request.user).first()
     if request.method == "POST":
-        # formInmueble = InmuebleUpdateForm(request.POST, instance=request.user)
-        # formInmueble = InmuebleUpdateForm(request.POST, instance=inmueble)
         print(request.POST)
         print("request")
 
@@ -384,7 +262,7 @@ def add_inmuebles(request):
             inmueble.pais = formInmueble.cleaned_data["pais"]
             inmueble.save()
             # print("graba")
-            messages.success(request, "Tu perfil ha sido actualizado.")
+            messages.success(request, "Tu inmueble ha sido actualizado.")
             return redirect("dashboard_prop")
         else:
             print(formInmueble.errors)
@@ -423,9 +301,10 @@ def mostrar_un_inmuebles(request, inmueble_id):
                 imagen = form.cleaned_data["imagen"]
                 ImagenInmueble.objects.create(propiedad=inmuebles, imagen=imagen)
                 messages.success(request, "La foto se ha agregado correctamente.")
-                return redirect(
-                    "mostrar_un_inmuebles", inmueble_id=inmueble_id
-                )  # Redirigir a mostrar detalles
+                return redirect("dashboard_prop")
+                # return redirect(
+                #     "mostrar_un_inmuebles", inmueble_id=inmueble_id
+                # )  # Redirigir a mostrar detalles
             else:
                 messages.error(request, "Hubo un error al intentar guardar la imagen.")
 
