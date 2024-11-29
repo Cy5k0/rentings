@@ -41,7 +41,7 @@ from .models import PerfilUsuario
 # Create your views here.
 def indice(request):
     inmuebles = Inmueble.objects.filter(disponible=True).order_by("?")[
-        :4
+        :6
     ]  # Selecciona 4 inmuebles aleatorios
 
     # fotos del inmueble
@@ -73,13 +73,15 @@ def indice(request):
         print(tipo_usuario)
         context = {
             "inmuebles_con_imagenes": inmuebles_con_imagenes,
-            'usuario': request.session.get('usuario'), 'tipo_usuario':tipo_usuario ,
-        # "ciudades": Ciudad.objects.all(),  # Para mostrar las ciudades en el menú desplegable
+            "usuario": request.session.get("usuario"),
+            "tipo_usuario": tipo_usuario,
+            # "ciudades": Ciudad.objects.all(),  # Para mostrar las ciudades en el menú desplegable
         }
         return render(
             request,
-            "index.html",context
-            #{"usuario": request.session.get("usuario"), "tipo_usuario": tipo_usuario},
+            "index.html",
+            context,
+            # {"usuario": request.session.get("usuario"), "tipo_usuario": tipo_usuario},
         )
 
         # return render(request, 'index.html', {'usuario': request.session.get('usuario'), 'tipo_usuario':tipo_usuario })
