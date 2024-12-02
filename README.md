@@ -1,7 +1,6 @@
 # Proyecto: Sitio Web para Arriendo de Inmuebles
 
-
-#### [Ir a Hito 1](#hito-1) - [Ir a Hito 2.1](#hito-2) - [Ir a Hito 2.2](#hito-2-segunda-parte) - [Ir a Hito 3](#hito-3) - [Ir a Hito 4.1](#hito-41) - [Ir a Hito 4.2](#hito-42)
+#### [Ir a Hito 1](#hito-1) - [Ir a Hito 2.1](#hito-2) - [Ir a Hito 2.2](#hito-2-segunda-parte) - [Ir a Hito 3](#hito-3) - [Ir a Hito 4.1](#hito-41) - [Ir a Hito 4.2](#hito-42) - [Ver documento PDF del Hito 5](ProyectoGRUPO2.pdf)
 
 ## Hito 1
 
@@ -324,6 +323,12 @@ Desarrollar una plataforma que facilite:
    git clone https://github.com/Cy5k0/rentings.git
 
 **[🖥️ Ver documento PDF](Hito4p2.pdf)**
+
+
+## Hito 5
+
+**[🖥️ Ver documento PDF](ProyectoGRUPO2.pdf)**
+
 
 ## 👥Integrantes:
 
